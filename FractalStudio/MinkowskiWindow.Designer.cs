@@ -236,7 +236,7 @@
             this.numericUpDownMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTipSizeEpsilon.SetToolTip(this.numericUpDownMin, "Начальный размер сетки\r\n");
             this.numericUpDownMin.Value = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
             0});

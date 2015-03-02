@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using Fractals.Tools;
 
 namespace Fractals.Dimension
 {
@@ -50,9 +51,9 @@ namespace Fractals.Dimension
             _value = 0;
             foreach (var imgPath in _fileNames)
             {
-                _bwContour = new Bitmap(imgPath);
-                _finishSize = _bwContour.Height > _bwContour.Width ? _bwContour.Width : _bwContour.Height;
-                _finishSize = _finishSize / 10 % 2 == 0 ? _finishSize / 10 + 1 : _finishSize / 10;
+                _bwContour = new Bitmap(imgPath)/*BitmapBinary.ToBlackWhite(new Bitmap(imgPath))*/;
+                _finishSize = Math.Min(_bwContour.Height, _bwContour.Width);
+                _finishSize = _finishSize / 10 ;
 
                 CallChangedImage(imgPath);
 
@@ -80,7 +81,7 @@ namespace Fractals.Dimension
                 lastSymb = imgPath.LastIndexOf(@"\") + 1;
                 name = imgPath.Substring(lastSymb, imgPath.Length - lastSymb);
 
-                CompletedDimensionData CompletedResult = new CompletedDimensionData() { Dim = mink, PathFile = imgPath, ShortName = name };
+                CompletedDimensionData CompletedResult = new CompletedDimensionData() { Dim = Math.Round(mink,2), PathFile = imgPath, ShortName = name };
                 
                 result.Add(CompletedResult);
                 
@@ -98,6 +99,7 @@ namespace Fractals.Dimension
             bool[,] colorImg = new bool[width, height];
             bool[,] filledBoxes;
 
+            
             //Получаем датасет цветов изображения для ускорения работы
             for (int x = 0; x < width; x++)
             {
@@ -111,20 +113,20 @@ namespace Fractals.Dimension
             //Имитация предела с изменение размера ячейки epsilon
             for (int epsilon = _startSize; epsilon <= _finishSize; epsilon += _step)
             {
-                int hCount = img.Height / epsilon,
-                    wCount = img.Width / epsilon;
+                int hCount = img.Height / (epsilon),
+                    wCount = img.Width / (epsilon );
 
                 int countEpsilon = 0;
 
-                filledBoxes = new bool[wCount + (img.Width > wCount * epsilon ? 1 : 0), hCount + (img.Height > hCount * epsilon ? 1 : 0)];
+                filledBoxes = new bool[wCount + (img.Width > wCount *epsilon ? 1 : 0), hCount + (img.Height > hCount *epsilon ? 1 : 0)];
 
                 for (int x = 0; x < width; ++x)
                     for (int y = 0; y < height; ++y)
                     {
                         if (colorImg[x, y])
                         {
-                            int xBox = x / epsilon;
-                            int yBox = y / epsilon;
+                            int xBox = x/ (epsilon);
+                            int yBox = y / (epsilon);
 
                             filledBoxes[xBox, yBox] = true;
                         }
@@ -134,6 +136,80 @@ namespace Fractals.Dimension
                 for (int i = 0; i < filledBoxes.GetLength(0); i++)
                 {
                     for (int j = 0; j < filledBoxes.GetLength(1); j++)
+                    {
+                        if (filledBoxes[i, j])
+                        {
+                            ++countEpsilon;
+                        }
+                    }
+                }
+
+                baList.Add(Math.Log(1d / epsilon), Math.Log(countEpsilon));
+
+                //_value = _value + _step >= _finishSize-_startSize ? _value = _finishSize - _startSize : _value + _step;
+
+                //CallChangedProgress();
+            }
+
+            return baList;
+        }
+
+        private Dictionary<double, double> CountingDimension2(Bitmap img)
+        {
+            #region
+
+            Dictionary<double, double> baList = new Dictionary<double, double>();
+            Bitmap bmp = BitmapBinary.ToBlackWhite(img);
+            int height = bmp.Height;
+            int width = bmp.Width;
+            bool[,] colorImg = new bool[width, height];
+            bool[,] filledBoxes;
+
+            
+            //Получаем датасет цветов изображения для ускорения работы
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    if (bmp.GetPixel(x, y).ToArgb() == Color.Black.ToArgb())
+                        colorImg[x, y] = true;
+                }
+            }
+            #endregion
+            //Имитация предела с изменение размера ячейки epsilon
+            
+            for (int epsilon = _startSize; epsilon <= _finishSize; epsilon+=_step)
+            {
+                int hCount = height/ epsilon,
+                    wCount = width / epsilon;
+
+                int countEpsilon = 0;
+
+                filledBoxes = new bool[wCount, hCount];
+
+                for (int i = 1; i < wCount; ++i)
+                    for (int j = 1; j < hCount; ++j)
+                    {
+                        for (int x = (i - 1) * epsilon+1 ; x <= i * epsilon; ++x)
+                        {
+                            for (int y = (j - 1)* epsilon+1 ; y <= j * epsilon; ++y)
+                            {
+                                if (colorImg[x, y])
+                                {
+                                    filledBoxes[i, j] = true;
+                                    break;
+                                }
+                            }
+                            if (filledBoxes[i, j])
+                                break;
+                        }
+
+                    }
+
+
+                for (int i = 1; i < filledBoxes.GetLength(0); i++)
+                {
+                    for (int j = 1; j < filledBoxes.GetLength(1); j++)
                     {
                         if (filledBoxes[i, j])
                         {
