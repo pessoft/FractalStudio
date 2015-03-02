@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22310.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FractalStudio", "FractalStudio\FractalStudio.csproj", "{BC138DBA-F202-4C7A-A471-31AF95305FC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fractals", "Fractals\Fractals.csproj", "{A6F69339-D398-491F-B240-7746BA50AF45}"
+	ProjectSection(ProjectDependencies) = postProject
+		{02E357EB-7051-42A4-88A6-EAF7860F59D5} = {02E357EB-7051-42A4-88A6-EAF7860F59D5}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComplexParser", "ComplexParser\ComplexParser.csproj", "{02E357EB-7051-42A4-88A6-EAF7860F59D5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC138DBA-F202-4C7A-A471-31AF95305FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC138DBA-F202-4C7A-A471-31AF95305FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC138DBA-F202-4C7A-A471-31AF95305FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC138DBA-F202-4C7A-A471-31AF95305FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6F69339-D398-491F-B240-7746BA50AF45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6F69339-D398-491F-B240-7746BA50AF45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6F69339-D398-491F-B240-7746BA50AF45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F69339-D398-491F-B240-7746BA50AF45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02E357EB-7051-42A4-88A6-EAF7860F59D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02E357EB-7051-42A4-88A6-EAF7860F59D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02E357EB-7051-42A4-88A6-EAF7860F59D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02E357EB-7051-42A4-88A6-EAF7860F59D5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://pessoft.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ComplexParser\\ComplexParser.csproj
+		SccProjectName1 = ComplexParser
+		SccLocalPath1 = ComplexParser
+		SccProjectUniqueName2 = Fractals\\Fractals.csproj
+		SccProjectName2 = Fractals
+		SccLocalPath2 = Fractals
+		SccProjectUniqueName3 = FractalStudio\\FractalStudio.csproj
+		SccProjectName3 = FractalStudio
+		SccLocalPath3 = FractalStudio
+	EndGlobalSection
+EndGlobal
