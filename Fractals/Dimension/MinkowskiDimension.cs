@@ -89,6 +89,8 @@ namespace Fractals.Dimension
            }
             _result = result;
             CallCompleted();
+            _bwContour.Dispose();
+            _bwContour = null;
         }
 
         #region Нахождение размерности Минковского методом наименьших квадратов

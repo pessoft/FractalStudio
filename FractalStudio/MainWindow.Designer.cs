@@ -60,7 +60,7 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.pictureBoxResult = new System.Windows.Forms.PictureBox();
-            this.openFileDialogImgDimension = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialogImg = new System.Windows.Forms.SaveFileDialog();
             this.mainMenu.SuspendLayout();
             this.mainSatusStrip.SuspendLayout();
             this.panelContent.SuspendLayout();
@@ -103,6 +103,7 @@
             this.saveAsMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveAsMenu.Size = new System.Drawing.Size(276, 22);
             this.saveAsMenu.Text = "Сохранить изображение как..";
+            this.saveAsMenu.Click += new System.EventHandler(this.SaveAsMenuClick);
             // 
             // CloseAppMenu
             // 
@@ -228,6 +229,7 @@
             this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
             this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
             this.сохранитьКакToolStripMenuItem.Text = "Сохранить изображение как..";
+            this.сохранитьКакToolStripMenuItem.Click += new System.EventHandler(this.SaveAsMenuClick);
             // 
             // фракталыToolStripMenuItem
             // 
@@ -283,7 +285,7 @@
             // минковскогоToolStripMenuItem
             // 
             this.минковскогоToolStripMenuItem.Name = "минковскогоToolStripMenuItem";
-            this.минковскогоToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.минковскогоToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.минковскогоToolStripMenuItem.Tag = "0";
             this.минковскогоToolStripMenuItem.Text = "Минковского";
             this.минковскогоToolStripMenuItem.Click += new System.EventHandler(this.WindowShowDimension);
@@ -303,14 +305,14 @@
             this.splitContainerContent.Panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.splitContainerContent.Panel1.Controls.Add(this.groupBoxCreate);
             this.splitContainerContent.Panel1.Controls.Add(this.groupBoxBtn);
-            this.splitContainerContent.Panel1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.splitContainerContent.Panel1.Padding = new System.Windows.Forms.Padding(5);
             this.splitContainerContent.Panel1MinSize = 280;
             // 
             // splitContainerContent.Panel2
             // 
             this.splitContainerContent.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.splitContainerContent.Panel2.Controls.Add(this.pictureBoxResult);
-            this.splitContainerContent.Panel2.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.splitContainerContent.Panel2.Padding = new System.Windows.Forms.Padding(5);
             this.splitContainerContent.Panel2MinSize = 0;
             this.splitContainerContent.Size = new System.Drawing.Size(695, 399);
             this.splitContainerContent.SplitterDistance = 280;
@@ -358,9 +360,9 @@
             this.groupBoxBtn.Controls.Add(this.btnStart);
             this.groupBoxBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBoxBtn.Location = new System.Drawing.Point(40, 324);
-            this.groupBoxBtn.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.groupBoxBtn.Margin = new System.Windows.Forms.Padding(7);
             this.groupBoxBtn.Name = "groupBoxBtn";
-            this.groupBoxBtn.Padding = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.groupBoxBtn.Padding = new System.Windows.Forms.Padding(7);
             this.groupBoxBtn.Size = new System.Drawing.Size(202, 58);
             this.groupBoxBtn.TabIndex = 0;
             this.groupBoxBtn.TabStop = false;
@@ -404,11 +406,11 @@
             this.pictureBoxResult.TabIndex = 0;
             this.pictureBoxResult.TabStop = false;
             // 
-            // openFileDialogImgDimension
+            // saveFileDialogImg
             // 
-            this.openFileDialogImgDimension.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;";
-            this.openFileDialogImgDimension.Multiselect = true;
-            this.openFileDialogImgDimension.Title = "Выбор изображений";
+            this.saveFileDialogImg.FileName = "Изображение";
+            this.saveFileDialogImg.Filter = "Image Files|*.jpeg;";
+            this.saveFileDialogImg.Title = "Сохранить изображение как..";
             // 
             // MainWindow
             // 
@@ -478,7 +480,7 @@
         private System.Windows.Forms.ToolStripMenuItem множествоМандельбротаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem размерностьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem минковскогоToolStripMenuItem;
-        private System.Windows.Forms.OpenFileDialog openFileDialogImgDimension;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogImg;
     }
 }
 

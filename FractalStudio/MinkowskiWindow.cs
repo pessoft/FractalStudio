@@ -63,5 +63,9 @@ namespace FractalStudio
 
             this.Close();
         }
+
+    
     }
+
+    
 }

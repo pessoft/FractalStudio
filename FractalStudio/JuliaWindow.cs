@@ -15,13 +15,13 @@ namespace FractalStudio
             _create = create;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void BtnCloseClick(object sender, EventArgs e)
         {
             this.Close();
         }
 
 
-        private void txtFz_KeyPress(object sender, KeyPressEventArgs e)
+        private void TxtFzKeyPress(object sender, KeyPressEventArgs e)
         {
             if (!isLexem(e))
                 e.Handled = true;
@@ -45,9 +45,9 @@ namespace FractalStudio
             return result;
         }
 
-        private void btnOk_Click(object sender, EventArgs e)
+        private void BtnOkClick(object sender, EventArgs e)
         {
-            this.Hide();
+            //this.Hide();
             _groupCrt.ContainerGroup.Controls.Clear();
             _groupCrt.ContainerGroup.Text = this.Text;
             panelJulia.Controls.Remove(btnCancel);
@@ -62,7 +62,8 @@ namespace FractalStudio
                 Xmax = Convert.ToDouble(numericUpDownXmax.Value),
                 Ymin = Convert.ToDouble(numericUpDownYmin.Value),
                 Ymax = Convert.ToDouble(numericUpDownYmax.Value),
-                Iteration = Convert.ToInt32(numericUpDownIteration.Value)
+                Iteration = Convert.ToInt32(numericUpDownIteration.Value),
+                NoName = Convert.ToInt32(numericUpDownNoName.Value)
             };
 
             _create(this, args);
@@ -76,7 +77,15 @@ namespace FractalStudio
             return this.ShowDialog();
         }
 
-        private void txtFz_Leave(object sender, EventArgs e)
+        private void TxtFzLeave(object sender, EventArgs e)
+        {
+            if (txtFz.Text.Length != 0 && txtFz.Text != placeholderJulia.GetPlaceholder(txtFz))
+                btnOk.Enabled = true;
+            else
+                btnOk.Enabled = false;
+        }
+
+        private void TxtFzTextChanged(object sender, EventArgs e)
         {
             if (txtFz.Text.Length != 0 && txtFz.Text != placeholderJulia.GetPlaceholder(txtFz))
                 btnOk.Enabled = true;

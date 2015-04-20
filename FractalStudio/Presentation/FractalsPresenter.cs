@@ -38,7 +38,7 @@ namespace FractalStudio.Presentation
             scaleXY.xMax = e.Xmax;
             scaleXY.yMin = e.Ymin;
             scaleXY.yMax = e.Ymax;
-            var initData = new JuliaInitData() { xyScale = scaleXY, ComplexFunction = _complexParser.Calculate,Iteration = e.Iteration };
+            var initData = new JuliaInitData() { xyScale = scaleXY, ComplexFunction = _complexParser.Calculate,Iteration = e.Iteration,NoName=e.NoName };
             _fractal = _fractalSource.GetFractal(initData);
             AddEventsFractal();
         }

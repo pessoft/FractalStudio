@@ -11,22 +11,26 @@ namespace Fractals.Fractal
     public class Julia : IFractal
     {
         Bitmap _bmp;
-        int _height, _width, _iteration;
+        int _height, _width, _iteration,_noName;
         double _xMin,_xMax,_yMin,_yMax,_dX,_dY;
         Func<Complex, Complex> _calculate;
         ChangedProgressEventArgs _changedProgressEventArgs;
         Complex z,tmpZ;
         int iter;
 
-        public Julia(ScaleXY scaleXY,int iteration,Func<Complex,Complex> calculate)
+        public Julia(ScaleXY scaleXY,int iteration,int noName,Func<Complex,Complex> calculate)
         {
             _height = 480;
             _width = 640;
             _iteration = iteration;
+            _noName = noName;
             _changedProgressEventArgs = new ChangedProgressEventArgs() { Minimum =0, Maximum = _width, Value = 0};
             _bmp = new Bitmap(_width, _height);
+            _bmp.SetResolution(600, 600);
+            using (var g = Graphics.FromImage(_bmp))
+                g.Clear(Color.White);
 
-            _xMin = scaleXY.xMin;
+                _xMin = scaleXY.xMin;
             _xMax = scaleXY.xMax;
             _yMin = scaleXY.yMin;
             _yMax = scaleXY.yMax;
@@ -56,10 +60,10 @@ namespace Fractals.Fractal
                         ++iter;
                         tmpZ = _calculate(z);
                         z = tmpZ;
-                        if (Math.Pow(z.Magnitude,2) >= 4)
+                        if (Math.Pow(z.Magnitude,2) >= _noName)
                             iter = _iteration;
                     }
-                    if (Math.Pow(z.Magnitude, 2) < 4)
+                    if (Math.Pow(z.Magnitude, 2) < _noName)
                     {
                         _bmp.SetPixel(width, height, Color.Black);
                     }

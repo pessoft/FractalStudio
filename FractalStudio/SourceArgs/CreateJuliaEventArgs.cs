@@ -10,6 +10,9 @@ namespace FractalStudio
         public int Iteration
         { get; set; }
 
+        public int NoName
+        { get; set; }
+
         public double Xmin
         { get; set; }
 

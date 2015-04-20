@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 namespace FractalStudio
 {
@@ -70,7 +72,12 @@ namespace FractalStudio
         /// <param name="fileName">Путь к изображению</param>
         public void ChangedImage(string fileName)
         {
-            Action method = new Action(() => pictureBoxResult.ImageLocation = fileName);
+            Action method = new Action(() =>
+            {
+                if (pictureBoxResult.Image != null)
+                    pictureBoxResult.Image = null;
+                pictureBoxResult.ImageLocation = fileName;
+            });
 
             InvokeMethod(method);
         }
@@ -81,7 +88,12 @@ namespace FractalStudio
         /// <param name="image">Новое изображение</param>
         public void ChangedImage(Bitmap image)
         {
-            Action method = new Action(() => pictureBoxResult.Image  = image);
+            Action method = new Action(() =>
+            {
+                if (pictureBoxResult.Image != null)
+                    pictureBoxResult.Image = null;
+                pictureBoxResult.Image = image;
+            });
 
             InvokeMethod(method);
         }
@@ -304,5 +316,16 @@ namespace FractalStudio
             if (Stop != null)
                 Stop(this, EventArgs.Empty);
         }
-    }
+
+        private void SaveAsMenuClick(object sender, EventArgs e)
+        {
+            if (saveFileDialogImg.ShowDialog() == DialogResult.OK)
+            {
+                
+                    pictureBoxResult.Image.Save(saveFileDialogImg.FileName);
+
+            }
+        }
+
+       }
 }
