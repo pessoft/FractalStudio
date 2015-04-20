@@ -3,25 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Numerics;
 namespace Fractals
 {
     public class JuliaInitData
     {
-        public string ComplexFunction
+        public Func<Complex,Complex> ComplexFunction
         { get; set; }
 
-        public double Xmin
+        public ScaleXY xyScale
         { get; set; }
 
-        public double Xmax
-        { get; set; }
-
-        public double Ymin
-        { get; set; }
-
-        public double Ymax
-        { get; set; }
 
         public int Iteration{ get; set; } = 20;
     }

@@ -20,7 +20,9 @@ namespace Fractals
 
         public IFractal GetFractal(JuliaInitData fractalInit)
         {
-            throw new NotImplementedException();
+            var julia = new Julia(fractalInit.xyScale, fractalInit.Iteration, fractalInit.ComplexFunction);
+            
+            return julia;
         }
 
         public IFractal GetFractal(LsysInitData fractalInit)

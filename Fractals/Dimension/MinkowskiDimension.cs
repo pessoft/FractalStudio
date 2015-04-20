@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Fractals.Tools;
+using System.Linq;
 
 namespace Fractals.Dimension
 {
@@ -76,8 +77,8 @@ namespace Fractals.Dimension
                     c++;
                 }
 
-                mink = NormalEquations2d(x, y);
-
+                  //mink = NormalEquations2d(x, y);
+                mink = _2NormalEquations2d(x, y);
                 lastSymb = imgPath.LastIndexOf(@"\") + 1;
                 name = imgPath.Substring(lastSymb, imgPath.Length - lastSymb);
 
@@ -94,22 +95,23 @@ namespace Fractals.Dimension
         private Dictionary<double, double> CountingDimension(Bitmap img)
         {
             Dictionary<double, double> baList = new Dictionary<double, double>();
+            Bitmap bmp = BitmapBinary.ToBlackWhite(img);
             int height = img.Height;
             int width = img.Width;
             bool[,] colorImg = new bool[width, height];
             bool[,] filledBoxes;
-
             
-            //Получаем датасет цветов изображения для ускорения работы
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    if (img.GetPixel(x, y).ToArgb() != Color.White.ToArgb())
-                        colorImg[x, y] = true;
-                }
-            }
-
+               
+               //Получаем датасет цветов изображения для ускорения работы
+               for (int x = 0; x < width; x++)
+               {
+                   for (int y = 0; y < height; y++)
+                   {
+                       if (img.GetPixel(x, y).ToArgb() != Color.White.ToArgb())
+                           colorImg[x, y] = true;
+                   }
+               }
+               
             //Имитация предела с изменение размера ячейки epsilon
             for (int epsilon = _startSize; epsilon <= _finishSize; epsilon += _step)
             {
@@ -269,6 +271,26 @@ namespace Fractals.Dimension
             }
 
             return Math.Round(theta[0], 3);
+        }
+
+        private double _2NormalEquations2d(double[] x, double[] y)
+        {
+            double k=0;
+            double sumXY = 0, sumX = 0, sumY = 0, sumSqrX = 0, sqrSumX = 0;
+            int n = x.Length ;
+            sumX = x.Sum();
+            sumY = y.Sum();
+            sqrSumX = sumX * sumX;
+            for (int i = 0; i < x.Length; ++i)
+            {
+                sumXY += x[i] * y[i];
+                sumSqrX += x[i] * x[i];
+            }
+
+
+            k = (n * sumXY - sumX * sumY) / (n * sumSqrX - sqrSumX);
+
+            return k;
         }
 
         #endregion

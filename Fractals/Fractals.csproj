@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,10 +59,12 @@
     <Compile Include="FractalsArgs\ChangedProgressEventArgs.cs" />
     <Compile Include="FractalsSource.cs" />
     <Compile Include="Fractal\IFractal.cs" />
+    <Compile Include="Fractal\Julia.cs" />
     <Compile Include="Fractal\Lsystem.cs" />
     <Compile Include="IFractalElements.cs" />
     <Compile Include="IFractalsSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScaleXY.cs" />
     <Compile Include="Tools\BitmapBinary.cs" />
   </ItemGroup>
   <ItemGroup>

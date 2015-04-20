@@ -41,7 +41,8 @@ namespace FractalStudio
         [Description("Выводит текст внутри текстового поля, который исчезает при получении фокуса")]
         [DisplayName("Placeholder")]
         [Category("Внешний вид")]
-               public string GetPlaceholder(Control control)
+
+        public string GetPlaceholder(Control control)
         {
             string result = "";
             if (_collectionPlaceholder.ContainsKey(control))

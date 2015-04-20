@@ -74,6 +74,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -173,6 +174,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ComplexParser\ComplexParser.csproj">
+      <Project>{02e357eb-7051-42a4-88a6-eaf7860f59d5}</Project>
+      <Name>ComplexParser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fractals\Fractals.csproj">
       <Project>{a6f69339-d398-491f-b240-7746ba50af45}</Project>
       <Name>Fractals</Name>

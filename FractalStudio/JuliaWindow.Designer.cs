@@ -47,6 +47,8 @@
             this.toolTipXminMax = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipYminMax = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipShortHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBoxIteration = new System.Windows.Forms.GroupBox();
+            this.numericUpDownIteration = new System.Windows.Forms.NumericUpDown();
             this.placeholderJulia = new FractalStudio.Placeholder();
             this.groupCreateJulia.SuspendLayout();
             this.panelJulia.SuspendLayout();
@@ -58,6 +60,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXmax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXmin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureShortHelp)).BeginInit();
+            this.groupBoxIteration.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIteration)).BeginInit();
             this.SuspendLayout();
             // 
             // groupCreateJulia
@@ -69,21 +73,22 @@
             this.groupCreateJulia.ForeColor = System.Drawing.SystemColors.Info;
             this.groupCreateJulia.Location = new System.Drawing.Point(12, 5);
             this.groupCreateJulia.Name = "groupCreateJulia";
-            this.groupCreateJulia.Size = new System.Drawing.Size(286, 209);
+            this.groupCreateJulia.Size = new System.Drawing.Size(324, 259);
             this.groupCreateJulia.TabIndex = 0;
             this.groupCreateJulia.TabStop = false;
             this.groupCreateJulia.Text = "Конструктор";
             // 
             // panelJulia
             // 
+            this.panelJulia.Controls.Add(this.groupBoxIteration);
+            this.panelJulia.Controls.Add(this.btnOk);
             this.panelJulia.Controls.Add(this.groupBoxFz);
             this.panelJulia.Controls.Add(this.btnCancel);
-            this.panelJulia.Controls.Add(this.btnOk);
             this.panelJulia.Controls.Add(this.groupBox1);
             this.panelJulia.Controls.Add(this.groupBoxX);
-            this.panelJulia.Location = new System.Drawing.Point(6, 22);
+            this.panelJulia.Location = new System.Drawing.Point(37, 28);
             this.panelJulia.Name = "panelJulia";
-            this.panelJulia.Size = new System.Drawing.Size(235, 184);
+            this.panelJulia.Size = new System.Drawing.Size(235, 222);
             this.panelJulia.TabIndex = 7;
             // 
             // groupBoxFz
@@ -111,6 +116,7 @@
             this.txtFz.Text = "Функция";
             this.toolTipFunc.SetToolTip(this.txtFz, resources.GetString("txtFz.ToolTip"));
             this.txtFz.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFz_KeyPress);
+            this.txtFz.Leave += new System.EventHandler(this.txtFz_Leave);
             // 
             // btnCancel
             // 
@@ -118,7 +124,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnCancel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnCancel.Location = new System.Drawing.Point(133, 150);
+            this.btnCancel.Location = new System.Drawing.Point(132, 154);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(94, 29);
             this.btnCancel.TabIndex = 7;
@@ -129,10 +135,11 @@
             // btnOk
             // 
             this.btnOk.BackColor = System.Drawing.SystemColors.Window;
+            this.btnOk.Enabled = false;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOk.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnOk.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnOk.Location = new System.Drawing.Point(13, 150);
+            this.btnOk.Location = new System.Drawing.Point(132, 185);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(94, 29);
             this.btnOk.TabIndex = 6;
@@ -171,6 +178,7 @@
             this.numericUpDownYmax.Name = "numericUpDownYmax";
             this.numericUpDownYmax.Size = new System.Drawing.Size(53, 25);
             this.numericUpDownYmax.TabIndex = 5;
+            this.numericUpDownYmax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTipYminMax.SetToolTip(this.numericUpDownYmax, "Укажите Ymax");
             this.numericUpDownYmax.Value = new decimal(new int[] {
             2,
@@ -195,6 +203,7 @@
             this.numericUpDownYmin.Name = "numericUpDownYmin";
             this.numericUpDownYmin.Size = new System.Drawing.Size(53, 25);
             this.numericUpDownYmin.TabIndex = 4;
+            this.numericUpDownYmin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTipYminMax.SetToolTip(this.numericUpDownYmin, "Укажите Ymin");
             this.numericUpDownYmin.Value = new decimal(new int[] {
             12,
@@ -233,6 +242,7 @@
             this.numericUpDownXmax.Name = "numericUpDownXmax";
             this.numericUpDownXmax.Size = new System.Drawing.Size(53, 25);
             this.numericUpDownXmax.TabIndex = 3;
+            this.numericUpDownXmax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTipXminMax.SetToolTip(this.numericUpDownXmax, "Укажите Xmax");
             this.numericUpDownXmax.Value = new decimal(new int[] {
             2,
@@ -257,6 +267,7 @@
             this.numericUpDownXmin.Name = "numericUpDownXmin";
             this.numericUpDownXmin.Size = new System.Drawing.Size(53, 25);
             this.numericUpDownXmin.TabIndex = 2;
+            this.numericUpDownXmin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTipXminMax.SetToolTip(this.numericUpDownXmin, "Укажите Xmin");
             this.numericUpDownXmin.Value = new decimal(new int[] {
             2,
@@ -267,7 +278,7 @@
             // pictureShortHelp
             // 
             this.pictureShortHelp.Image = ((System.Drawing.Image)(resources.GetObject("pictureShortHelp.Image")));
-            this.pictureShortHelp.Location = new System.Drawing.Point(247, 28);
+            this.pictureShortHelp.Location = new System.Drawing.Point(287, 28);
             this.pictureShortHelp.Name = "pictureShortHelp";
             this.pictureShortHelp.Size = new System.Drawing.Size(31, 31);
             this.pictureShortHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -308,12 +319,43 @@
             this.toolTipShortHelp.ReshowDelay = 100;
             this.toolTipShortHelp.ToolTipTitle = "Множество Жюлиа";
             // 
+            // groupBoxIteration
+            // 
+            this.groupBoxIteration.Controls.Add(this.numericUpDownIteration);
+            this.groupBoxIteration.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBoxIteration.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBoxIteration.ForeColor = System.Drawing.SystemColors.Info;
+            this.groupBoxIteration.Location = new System.Drawing.Point(13, 150);
+            this.groupBoxIteration.Name = "groupBoxIteration";
+            this.groupBoxIteration.Size = new System.Drawing.Size(94, 64);
+            this.groupBoxIteration.TabIndex = 9;
+            this.groupBoxIteration.TabStop = false;
+            this.groupBoxIteration.Text = "Итерация";
+            // 
+            // numericUpDownIteration
+            // 
+            this.numericUpDownIteration.Location = new System.Drawing.Point(19, 24);
+            this.numericUpDownIteration.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.numericUpDownIteration.Name = "numericUpDownIteration";
+            this.numericUpDownIteration.Size = new System.Drawing.Size(53, 25);
+            this.numericUpDownIteration.TabIndex = 0;
+            this.numericUpDownIteration.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDownIteration.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
             // JuliaWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(313, 220);
+            this.ClientSize = new System.Drawing.Size(347, 271);
             this.Controls.Add(this.groupCreateJulia);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -322,6 +364,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "JuliaWindow";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Julia";
             this.groupCreateJulia.ResumeLayout(false);
@@ -335,6 +378,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXmax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXmin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureShortHelp)).EndInit();
+            this.groupBoxIteration.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIteration)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -359,5 +404,7 @@
         private System.Windows.Forms.Panel panelJulia;
         private System.Windows.Forms.GroupBox groupBoxFz;
         private Placeholder placeholderJulia;
+        private System.Windows.Forms.GroupBox groupBoxIteration;
+        private System.Windows.Forms.NumericUpDown numericUpDownIteration;
     }
 }

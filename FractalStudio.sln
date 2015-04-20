@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.22310.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FractalStudio", "FractalStudio\FractalStudio.csproj", "{BC138DBA-F202-4C7A-A471-31AF95305FC7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{02E357EB-7051-42A4-88A6-EAF7860F59D5} = {02E357EB-7051-42A4-88A6-EAF7860F59D5}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fractals", "Fractals\Fractals.csproj", "{A6F69339-D398-491F-B240-7746BA50AF45}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -33,20 +36,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://pessoft.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ComplexParser\\ComplexParser.csproj
-		SccProjectName1 = ComplexParser
-		SccLocalPath1 = ComplexParser
-		SccProjectUniqueName2 = Fractals\\Fractals.csproj
-		SccProjectName2 = Fractals
-		SccLocalPath2 = Fractals
-		SccProjectUniqueName3 = FractalStudio\\FractalStudio.csproj
-		SccProjectName3 = FractalStudio
-		SccLocalPath3 = FractalStudio
 	EndGlobalSection
 EndGlobal
