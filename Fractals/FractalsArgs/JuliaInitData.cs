@@ -14,6 +14,8 @@ namespace Fractals
         public ScaleXY xyScale
         { get; set; }
 
+        public bool Fill
+        { get; set; }
 
         public int Iteration{ get; set; } = 20;
         public int NoName { get; set; } = 4;

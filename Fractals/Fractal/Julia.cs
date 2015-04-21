@@ -11,6 +11,7 @@ namespace Fractals.Fractal
     public class Julia : IFractal
     {
         Bitmap _bmp;
+        bool _fill;
         int _height, _width, _iteration,_noName;
         double _xMin,_xMax,_yMin,_yMax,_dX,_dY;
         Func<Complex, Complex> _calculate;
@@ -18,8 +19,9 @@ namespace Fractals.Fractal
         Complex z,tmpZ;
         int iter;
 
-        public Julia(ScaleXY scaleXY,int iteration,int noName,Func<Complex,Complex> calculate)
+        public Julia(ScaleXY scaleXY,int iteration,int noName,bool fill ,Func<Complex,Complex> calculate)
         {
+            _fill = fill;
             _height = 480;
             _width = 640;
             _iteration = iteration;
@@ -60,13 +62,32 @@ namespace Fractals.Fractal
                         ++iter;
                         tmpZ = _calculate(z);
                         z = tmpZ;
-                        if (Math.Pow(z.Magnitude,2) >= _noName)
-                            iter = _iteration;
+                        if (_fill)
+                        {
+                            if (Math.Pow(z.Magnitude, 2) >= _noName)
+                                iter = _iteration;
+                        }
+                        else
+                        {
+                            if (Math.Pow(z.Magnitude, 2) == _noName)
+                                iter = _iteration;
+                        }
                     }
-                    if (Math.Pow(z.Magnitude, 2) < _noName)
+                    if (_fill)
                     {
-                        _bmp.SetPixel(width, height, Color.Black);
+                        if (Math.Pow(z.Magnitude, 2) < _noName)
+                        {
+                            _bmp.SetPixel(width, height, Color.Black);
+                        }
                     }
+                    else
+                    {
+                        if (Math.Pow(z.Magnitude, 2) > _noName)
+                        {
+                            _bmp.SetPixel(width, height, Color.Black);
+                        }
+                    }
+                   
                 }
 
                 ++_changedProgressEventArgs.Value;

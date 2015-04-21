@@ -52,7 +52,7 @@ namespace FractalStudio
             _groupCrt.ContainerGroup.Text = this.Text;
             panelJulia.Controls.Remove(btnCancel);
             panelJulia.Location = new System.Drawing.Point(6,panelJulia.Location.Y);
-            //btnOk.Left = btnCancel.Left;
+            btnOk.Left = btnCancel.Left;
             _groupCrt.ContainerGroup.Controls.Add(panelJulia);
 
             var args = new CreateJuliaEventArgs
@@ -63,7 +63,8 @@ namespace FractalStudio
                 Ymin = Convert.ToDouble(numericUpDownYmin.Value),
                 Ymax = Convert.ToDouble(numericUpDownYmax.Value),
                 Iteration = Convert.ToInt32(numericUpDownIteration.Value),
-                NoName = Convert.ToInt32(numericUpDownNoName.Value)
+                NoName = Convert.ToInt32(numericUpDownNoName.Value),
+                Fill = radioButtonFill.Checked
             };
 
             _create(this, args);

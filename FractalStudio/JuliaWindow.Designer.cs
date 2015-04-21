@@ -51,6 +51,9 @@
             this.toolTipXminMax = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipYminMax = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipShortHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBoxFill = new System.Windows.Forms.GroupBox();
+            this.radioButtonFill = new System.Windows.Forms.RadioButton();
+            this.radioButtonNotFill = new System.Windows.Forms.RadioButton();
             this.placeholderJulia = new FractalStudio.Placeholder();
             this.groupCreateJulia.SuspendLayout();
             this.panelJulia.SuspendLayout();
@@ -66,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXmax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXmin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureShortHelp)).BeginInit();
+            this.groupBoxFill.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupCreateJulia
@@ -77,13 +81,14 @@
             this.groupCreateJulia.ForeColor = System.Drawing.SystemColors.Info;
             this.groupCreateJulia.Location = new System.Drawing.Point(12, 5);
             this.groupCreateJulia.Name = "groupCreateJulia";
-            this.groupCreateJulia.Size = new System.Drawing.Size(281, 292);
+            this.groupCreateJulia.Size = new System.Drawing.Size(288, 292);
             this.groupCreateJulia.TabIndex = 0;
             this.groupCreateJulia.TabStop = false;
             this.groupCreateJulia.Text = "Конструктор";
             // 
             // panelJulia
             // 
+            this.panelJulia.Controls.Add(this.groupBoxFill);
             this.panelJulia.Controls.Add(this.groupBoxNoName);
             this.panelJulia.Controls.Add(this.groupBoxIteration);
             this.panelJulia.Controls.Add(this.btnOk);
@@ -91,9 +96,9 @@
             this.panelJulia.Controls.Add(this.btnCancel);
             this.panelJulia.Controls.Add(this.groupBox1);
             this.panelJulia.Controls.Add(this.groupBoxX);
-            this.panelJulia.Location = new System.Drawing.Point(6, 28);
+            this.panelJulia.Location = new System.Drawing.Point(10, 28);
             this.panelJulia.Name = "panelJulia";
-            this.panelJulia.Size = new System.Drawing.Size(229, 258);
+            this.panelJulia.Size = new System.Drawing.Size(235, 258);
             this.panelJulia.TabIndex = 7;
             // 
             // groupBoxNoName
@@ -102,7 +107,7 @@
             this.groupBoxNoName.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBoxNoName.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxNoName.ForeColor = System.Drawing.SystemColors.Info;
-            this.groupBoxNoName.Location = new System.Drawing.Point(123, 155);
+            this.groupBoxNoName.Location = new System.Drawing.Point(125, 155);
             this.groupBoxNoName.Name = "groupBoxNoName";
             this.groupBoxNoName.Size = new System.Drawing.Size(94, 59);
             this.groupBoxNoName.TabIndex = 10;
@@ -111,14 +116,14 @@
             // 
             // numericUpDownNoName
             // 
-            this.numericUpDownNoName.Location = new System.Drawing.Point(19, 24);
+            this.numericUpDownNoName.Location = new System.Drawing.Point(21, 24);
             this.numericUpDownNoName.Maximum = new decimal(new int[] {
             200,
             0,
             0,
             0});
             this.numericUpDownNoName.Name = "numericUpDownNoName";
-            this.numericUpDownNoName.Size = new System.Drawing.Size(53, 25);
+            this.numericUpDownNoName.Size = new System.Drawing.Size(55, 25);
             this.numericUpDownNoName.TabIndex = 8;
             this.numericUpDownNoName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDownNoName.Value = new decimal(new int[] {
@@ -133,7 +138,7 @@
             this.groupBoxIteration.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBoxIteration.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxIteration.ForeColor = System.Drawing.SystemColors.Info;
-            this.groupBoxIteration.Location = new System.Drawing.Point(13, 155);
+            this.groupBoxIteration.Location = new System.Drawing.Point(10, 155);
             this.groupBoxIteration.Name = "groupBoxIteration";
             this.groupBoxIteration.Size = new System.Drawing.Size(94, 59);
             this.groupBoxIteration.TabIndex = 9;
@@ -150,7 +155,7 @@
             0});
             this.numericUpDownIteration.Name = "numericUpDownIteration";
             this.numericUpDownIteration.Size = new System.Drawing.Size(53, 25);
-            this.numericUpDownIteration.TabIndex = 0;
+            this.numericUpDownIteration.TabIndex = 7;
             this.numericUpDownIteration.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDownIteration.Value = new decimal(new int[] {
             20,
@@ -165,7 +170,7 @@
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOk.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnOk.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnOk.Location = new System.Drawing.Point(123, 220);
+            this.btnOk.Location = new System.Drawing.Point(10, 220);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(94, 29);
             this.btnOk.TabIndex = 2;
@@ -179,9 +184,9 @@
             this.groupBoxFz.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBoxFz.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxFz.ForeColor = System.Drawing.SystemColors.Info;
-            this.groupBoxFz.Location = new System.Drawing.Point(13, 5);
+            this.groupBoxFz.Location = new System.Drawing.Point(10, 3);
             this.groupBoxFz.Name = "groupBoxFz";
-            this.groupBoxFz.Size = new System.Drawing.Size(204, 54);
+            this.groupBoxFz.Size = new System.Drawing.Size(209, 54);
             this.groupBoxFz.TabIndex = 8;
             this.groupBoxFz.TabStop = false;
             this.groupBoxFz.Text = "f(z)";
@@ -193,7 +198,7 @@
             this.txtFz.Location = new System.Drawing.Point(9, 23);
             this.txtFz.Name = "txtFz";
             this.placeholderJulia.SetPlaceholder(this.txtFz, "Функция");
-            this.txtFz.Size = new System.Drawing.Size(182, 25);
+            this.txtFz.Size = new System.Drawing.Size(187, 25);
             this.txtFz.TabIndex = 1;
             this.txtFz.Text = "Функция";
             this.toolTipFunc.SetToolTip(this.txtFz, resources.GetString("txtFz.ToolTip"));
@@ -207,10 +212,10 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnCancel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnCancel.Location = new System.Drawing.Point(13, 220);
+            this.btnCancel.Location = new System.Drawing.Point(125, 220);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(94, 29);
-            this.btnCancel.TabIndex = 9;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.BtnCloseClick);
@@ -222,9 +227,9 @@
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Info;
-            this.groupBox1.Location = new System.Drawing.Point(123, 60);
+            this.groupBox1.Location = new System.Drawing.Point(82, 60);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(94, 89);
+            this.groupBox1.Size = new System.Drawing.Size(65, 89);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "y";
@@ -237,7 +242,7 @@
             0,
             0,
             65536});
-            this.numericUpDownYmax.Location = new System.Drawing.Point(19, 55);
+            this.numericUpDownYmax.Location = new System.Drawing.Point(6, 55);
             this.numericUpDownYmax.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -267,7 +272,7 @@
             0,
             0,
             65536});
-            this.numericUpDownYmin.Location = new System.Drawing.Point(19, 24);
+            this.numericUpDownYmin.Location = new System.Drawing.Point(6, 24);
             this.numericUpDownYmin.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -296,9 +301,9 @@
             this.groupBoxX.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBoxX.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxX.ForeColor = System.Drawing.SystemColors.Info;
-            this.groupBoxX.Location = new System.Drawing.Point(13, 60);
+            this.groupBoxX.Location = new System.Drawing.Point(10, 60);
             this.groupBoxX.Name = "groupBoxX";
-            this.groupBoxX.Size = new System.Drawing.Size(94, 89);
+            this.groupBoxX.Size = new System.Drawing.Size(65, 89);
             this.groupBoxX.TabIndex = 3;
             this.groupBoxX.TabStop = false;
             this.groupBoxX.Text = "x";
@@ -311,7 +316,7 @@
             0,
             0,
             65536});
-            this.numericUpDownXmax.Location = new System.Drawing.Point(19, 55);
+            this.numericUpDownXmax.Location = new System.Drawing.Point(9, 55);
             this.numericUpDownXmax.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -341,7 +346,7 @@
             0,
             0,
             65536});
-            this.numericUpDownXmin.Location = new System.Drawing.Point(19, 24);
+            this.numericUpDownXmin.Location = new System.Drawing.Point(9, 24);
             this.numericUpDownXmin.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -366,7 +371,7 @@
             // pictureShortHelp
             // 
             this.pictureShortHelp.Image = ((System.Drawing.Image)(resources.GetObject("pictureShortHelp.Image")));
-            this.pictureShortHelp.Location = new System.Drawing.Point(241, 28);
+            this.pictureShortHelp.Location = new System.Drawing.Point(251, 28);
             this.pictureShortHelp.Name = "pictureShortHelp";
             this.pictureShortHelp.Size = new System.Drawing.Size(31, 31);
             this.pictureShortHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -407,12 +412,48 @@
             this.toolTipShortHelp.ReshowDelay = 100;
             this.toolTipShortHelp.ToolTipTitle = "Множество Жюлиа";
             // 
+            // groupBoxFill
+            // 
+            this.groupBoxFill.Controls.Add(this.radioButtonNotFill);
+            this.groupBoxFill.Controls.Add(this.radioButtonFill);
+            this.groupBoxFill.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBoxFill.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBoxFill.ForeColor = System.Drawing.SystemColors.Info;
+            this.groupBoxFill.Location = new System.Drawing.Point(155, 60);
+            this.groupBoxFill.Name = "groupBoxFill";
+            this.groupBoxFill.Size = new System.Drawing.Size(64, 89);
+            this.groupBoxFill.TabIndex = 11;
+            this.groupBoxFill.TabStop = false;
+            this.groupBoxFill.Text = "Set";
+            // 
+            // radioButtonFill
+            // 
+            this.radioButtonFill.AutoSize = true;
+            this.radioButtonFill.Checked = true;
+            this.radioButtonFill.Location = new System.Drawing.Point(6, 24);
+            this.radioButtonFill.Name = "radioButtonFill";
+            this.radioButtonFill.Size = new System.Drawing.Size(42, 21);
+            this.radioButtonFill.TabIndex = 10;
+            this.radioButtonFill.TabStop = true;
+            this.radioButtonFill.Text = "Fill";
+            this.radioButtonFill.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonNotFill
+            // 
+            this.radioButtonNotFill.AutoSize = true;
+            this.radioButtonNotFill.Location = new System.Drawing.Point(6, 50);
+            this.radioButtonNotFill.Name = "radioButtonNotFill";
+            this.radioButtonNotFill.Size = new System.Drawing.Size(52, 21);
+            this.radioButtonNotFill.TabIndex = 11;
+            this.radioButtonNotFill.Text = "NFill";
+            this.radioButtonNotFill.UseVisualStyleBackColor = true;
+            // 
             // JuliaWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(305, 303);
+            this.ClientSize = new System.Drawing.Size(312, 303);
             this.Controls.Add(this.groupCreateJulia);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -439,6 +480,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXmax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXmin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureShortHelp)).EndInit();
+            this.groupBoxFill.ResumeLayout(false);
+            this.groupBoxFill.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -467,5 +510,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDownIteration;
         private System.Windows.Forms.GroupBox groupBoxNoName;
         private System.Windows.Forms.NumericUpDown numericUpDownNoName;
+        private System.Windows.Forms.GroupBox groupBoxFill;
+        private System.Windows.Forms.RadioButton radioButtonNotFill;
+        private System.Windows.Forms.RadioButton radioButtonFill;
     }
 }

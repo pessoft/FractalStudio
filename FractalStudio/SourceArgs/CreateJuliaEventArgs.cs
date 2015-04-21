@@ -7,6 +7,8 @@ namespace FractalStudio
         public string ComplexFunction
         { get;set; }
 
+        public bool Fill
+        { get; set; }
         public int Iteration
         { get; set; }
 

@@ -20,7 +20,7 @@ namespace Fractals
 
         public IFractal GetFractal(JuliaInitData fractalInit)
         {
-            var julia = new Julia(fractalInit.xyScale, fractalInit.Iteration,fractalInit.NoName,fractalInit.ComplexFunction);
+            var julia = new Julia(fractalInit.xyScale, fractalInit.Iteration,fractalInit.NoName,fractalInit.Fill,fractalInit.ComplexFunction);
             
             return julia;
         }
