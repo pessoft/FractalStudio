@@ -26,8 +26,23 @@ namespace FractalStudio.Presentation
 
             _view.CreateMinkowskiDimesion += ViewCreateMinkowskiDimesion;
             _view.CreateJulia += ViewCreateJulia;
+            _view.CreateMandelbrot += ViewCreateMandelbrot;
             _view.Start += ViewStart;
             _view.Stop += ViewStop;
+        }
+
+        private void ViewCreateMandelbrot(object sender, CreateMandelbrotEventArgs e)
+        {
+            _complexParser = new ComplexParser.ComplexParser(e.ComplexFunction);
+            var scaleXY = new ScaleXY();
+            scaleXY.xMin = e.Xmin;
+            scaleXY.xMax = e.Xmax;
+            scaleXY.yMin = e.Ymin;
+            scaleXY.yMax = e.Ymax;
+            var initData = new MandelbrotInitData()
+            { xyScale = scaleXY, ComplexFunction = _complexParser.Calculate, Iteration = e.Iteration, NoName = e.NoName, Fill = e.Fill };
+            _fractal = _fractalSource.GetFractal(initData);
+            AddEventsFractal();
         }
 
         private void ViewCreateJulia(object sender, CreateJuliaEventArgs e)

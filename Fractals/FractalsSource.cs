@@ -25,6 +25,13 @@ namespace Fractals
             return julia;
         }
 
+        public IFractal GetFractal(MandelbrotInitData fractalInit)
+        {
+            var mandelbrot = new Mandelbrot(fractalInit.xyScale, fractalInit.Iteration, fractalInit.NoName, fractalInit.Fill, fractalInit.ComplexFunction);
+
+            return mandelbrot;
+        }
+
         public IFractal GetFractal(LsysInitData fractalInit)
         {
             throw new NotImplementedException();

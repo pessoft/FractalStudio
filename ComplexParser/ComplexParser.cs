@@ -58,7 +58,7 @@ namespace ComplexParser
             dynamic calculateCreator = Activator.CreateInstance(cls);
             Func<Complex, Complex> calculate = (Func<Complex, Complex>)calculateCreator.Create();
 
-            _calculate= calculate;
+            _calculate = calculate;
          }
     }
 }

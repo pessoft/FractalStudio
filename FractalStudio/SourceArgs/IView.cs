@@ -7,11 +7,12 @@ namespace FractalStudio
     public interface IView
     {
         #region Event
-         event EventHandler<CreateLsystemEventArgs> CreateLsystem;
-         event EventHandler<CreateJuliaEventArgs> CreateJulia;
-         event EventHandler<CreateMinkowskiEventArgs> CreateMinkowskiDimesion;
-         event EventHandler Start;
-         event EventHandler Stop;
+        event EventHandler<CreateLsystemEventArgs> CreateLsystem;
+        event EventHandler<CreateJuliaEventArgs> CreateJulia;
+        event EventHandler<CreateMinkowskiEventArgs> CreateMinkowskiDimesion;
+        event EventHandler<CreateMandelbrotEventArgs> CreateMandelbrot;
+        event EventHandler Start;
+        event EventHandler Stop;
         #endregion
 
         #region Methods

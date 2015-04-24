@@ -17,6 +17,7 @@ namespace FractalStudio
 
         public event EventHandler<CreateLsystemEventArgs> CreateLsystem;
         public event EventHandler<CreateJuliaEventArgs> CreateJulia;
+        public event EventHandler<CreateMandelbrotEventArgs> CreateMandelbrot;
         public event EventHandler<CreateMinkowskiEventArgs> CreateMinkowskiDimesion;
 
         public event EventHandler Start;
@@ -218,7 +219,7 @@ namespace FractalStudio
                 case 0: _windowModal = new LsystemWindow(CreateLsys); break;
                 case 1: _windowModal = null; break;
                 case 2: _windowModal = new JuliaWindow(CreateJuliaSet); break;
-                case 3: MessageBox.Show("3"); break;
+                case 3: _windowModal = new MandelbrotWindow(CreateMandelbrotSet); break;
             }
 
             if (_windowModal != null)
@@ -241,9 +242,6 @@ namespace FractalStudio
             switch (tag)
             {
                 case 0: _windowModal = new MinkowskiWindow(CreateMinkowski); break;
-                case 1: _windowModal =null; break;
-                case 2: _windowModal = null; break;
-                case 3: MessageBox.Show("3"); break;
             }
 
             if (_windowModal != null)
@@ -263,6 +261,14 @@ namespace FractalStudio
 
             if (CreateJulia != null)
                 CreateJulia(this, e);
+        }
+
+        private void CreateMandelbrotSet(object sender, CreateMandelbrotEventArgs e)
+        {
+            btnStart.Enabled = true;
+
+            if (CreateMandelbrot != null)
+                CreateMandelbrot(this, e);
         }
 
         private void CreateMinkowski(object sender, CreateMinkowskiEventArgs e)

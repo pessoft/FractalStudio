@@ -1,6 +1,6 @@
 ﻿namespace FractalStudio
 {
-    partial class JuliaWindow
+    partial class MandelbrotWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JuliaWindow));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MandelbrotWindow));
             this.groupCreateJulia = new System.Windows.Forms.GroupBox();
             this.panelJulia = new System.Windows.Forms.Panel();
             this.groupBoxFill = new System.Windows.Forms.GroupBox();
@@ -54,7 +54,7 @@
             this.toolTipXminMax = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipYminMax = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipShortHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.placeholderJulia = new FractalStudio.Placeholder();
+            this.placeholderMandelbrot = new FractalStudio.Placeholder();
             this.groupCreateJulia.SuspendLayout();
             this.panelJulia.SuspendLayout();
             this.groupBoxFill.SuspendLayout();
@@ -74,6 +74,7 @@
             // 
             // groupCreateJulia
             // 
+            this.groupCreateJulia.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.groupCreateJulia.Controls.Add(this.panelJulia);
             this.groupCreateJulia.Controls.Add(this.pictureShortHelp);
             this.groupCreateJulia.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -82,7 +83,7 @@
             this.groupCreateJulia.Location = new System.Drawing.Point(12, 5);
             this.groupCreateJulia.Name = "groupCreateJulia";
             this.groupCreateJulia.Size = new System.Drawing.Size(288, 292);
-            this.groupCreateJulia.TabIndex = 0;
+            this.groupCreateJulia.TabIndex = 1;
             this.groupCreateJulia.TabStop = false;
             this.groupCreateJulia.Text = "Конструктор";
             // 
@@ -233,7 +234,7 @@
             this.txtFz.ForeColor = System.Drawing.SystemColors.WindowText;
             this.txtFz.Location = new System.Drawing.Point(9, 23);
             this.txtFz.Name = "txtFz";
-            this.placeholderJulia.SetPlaceholder(this.txtFz, "Функция");
+            this.placeholderMandelbrot.SetPlaceholder(this.txtFz, "Функция");
             this.txtFz.Size = new System.Drawing.Size(187, 25);
             this.txtFz.TabIndex = 1;
             this.txtFz.Text = "Функция";
@@ -398,7 +399,7 @@
             this.numericUpDownXmin.Size = new System.Drawing.Size(53, 25);
             this.numericUpDownXmin.TabIndex = 3;
             this.numericUpDownXmin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTipXminMax.SetToolTip(this.numericUpDownXmin, "Укажите Xmin");
+            this.toolTipXminMax.SetToolTip(this.numericUpDownXmin, "Укажите Xmin\r\n");
             this.numericUpDownXmin.Value = new decimal(new int[] {
             2,
             0,
@@ -415,7 +416,7 @@
             this.pictureShortHelp.TabIndex = 2;
             this.pictureShortHelp.TabStop = false;
             this.toolTipShortHelp.SetToolTip(this.pictureShortHelp, "Для того, что бы построить множество Жюлиа  нужно:\r\n указать функцию f(z)\r\n указа" +
-        "ть минимальные и максимальные значения X и Y");
+        "ть минимальные и максимальные значения X и Y\r\n");
             // 
             // toolTipFunc
             // 
@@ -449,23 +450,21 @@
             this.toolTipShortHelp.ReshowDelay = 100;
             this.toolTipShortHelp.ToolTipTitle = "Множество Жюлиа";
             // 
-            // JuliaWindow
+            // MandelbrotWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(312, 303);
+            this.ClientSize = new System.Drawing.Size(310, 301);
             this.Controls.Add(this.groupCreateJulia);
-            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "JuliaWindow";
+            this.Name = "MandelbrotWindow";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Julia";
+            this.Text = "Mandelbrot";
             this.groupCreateJulia.ResumeLayout(false);
             this.panelJulia.ResumeLayout(false);
             this.groupBoxFill.ResumeLayout(false);
@@ -490,29 +489,29 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupCreateJulia;
-        private System.Windows.Forms.TextBox txtFz;
-        private System.Windows.Forms.PictureBox pictureShortHelp;
-        private System.Windows.Forms.GroupBox groupBoxX;
-        private System.Windows.Forms.NumericUpDown numericUpDownXmax;
-        private System.Windows.Forms.NumericUpDown numericUpDownXmin;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Panel panelJulia;
+        private System.Windows.Forms.GroupBox groupBoxFill;
+        private System.Windows.Forms.RadioButton radioButtonNotFill;
+        private System.Windows.Forms.RadioButton radioButtonFill;
+        private System.Windows.Forms.GroupBox groupBoxNoName;
+        private System.Windows.Forms.NumericUpDown numericUpDownNoName;
+        private System.Windows.Forms.GroupBox groupBoxIteration;
+        private System.Windows.Forms.NumericUpDown numericUpDownIteration;
         private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.GroupBox groupBoxFz;
+        private System.Windows.Forms.TextBox txtFz;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.NumericUpDown numericUpDownYmax;
         private System.Windows.Forms.NumericUpDown numericUpDownYmin;
+        private System.Windows.Forms.GroupBox groupBoxX;
+        private System.Windows.Forms.NumericUpDown numericUpDownXmax;
+        private System.Windows.Forms.NumericUpDown numericUpDownXmin;
+        private System.Windows.Forms.PictureBox pictureShortHelp;
+        private Placeholder placeholderMandelbrot;
         private System.Windows.Forms.ToolTip toolTipFunc;
         private System.Windows.Forms.ToolTip toolTipXminMax;
         private System.Windows.Forms.ToolTip toolTipYminMax;
         private System.Windows.Forms.ToolTip toolTipShortHelp;
-        private System.Windows.Forms.Panel panelJulia;
-        private System.Windows.Forms.GroupBox groupBoxFz;
-        private Placeholder placeholderJulia;
-        private System.Windows.Forms.GroupBox groupBoxIteration;
-        private System.Windows.Forms.NumericUpDown numericUpDownIteration;
-        private System.Windows.Forms.GroupBox groupBoxNoName;
-        private System.Windows.Forms.NumericUpDown numericUpDownNoName;
-        private System.Windows.Forms.GroupBox groupBoxFill;
-        private System.Windows.Forms.RadioButton radioButtonNotFill;
-        private System.Windows.Forms.RadioButton radioButtonFill;
     }
 }

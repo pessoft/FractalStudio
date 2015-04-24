@@ -55,12 +55,14 @@
     <Compile Include="FractalsArgs\ChangedImageEventAgrs.cs" />
     <Compile Include="FractalsArgs\JuliaInitData.cs" />
     <Compile Include="FractalsArgs\LsysInitData.cs" />
+    <Compile Include="FractalsArgs\MandelbrotInitData.cs" />
     <Compile Include="FractalsArgs\MinkowskiInitData.cs" />
     <Compile Include="FractalsArgs\ChangedProgressEventArgs.cs" />
     <Compile Include="FractalsSource.cs" />
     <Compile Include="Fractal\IFractal.cs" />
     <Compile Include="Fractal\Julia.cs" />
     <Compile Include="Fractal\Lsystem.cs" />
+    <Compile Include="Fractal\Mandelbrot.cs" />
     <Compile Include="IFractalElements.cs" />
     <Compile Include="IFractalsSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -25,6 +25,7 @@ namespace Fractals
         /// <param name="fractalInit">Исходные данные</param>
         /// <returns>Возвращает интерфейс работы с фракталом</returns>
         IFractal GetFractal(JuliaInitData fractalInit);
+        IFractal GetFractal(MandelbrotInitData fractalInit);
         #endregion
 
         #region Dimension

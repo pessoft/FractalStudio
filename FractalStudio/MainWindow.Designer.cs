@@ -162,6 +162,7 @@
             this.mandelbrotMenu.Size = new System.Drawing.Size(297, 22);
             this.mandelbrotMenu.Tag = "3";
             this.mandelbrotMenu.Text = "Мандельброт";
+            this.mandelbrotMenu.Click += new System.EventHandler(this.WindowShowFractal);
             // 
             // DimensionsMenu
             // 
