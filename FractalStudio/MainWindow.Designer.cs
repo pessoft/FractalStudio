@@ -52,7 +52,7 @@
             this.множествоЖюлиаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.множествоМандельбротаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.размерностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.минковскогоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MinkowskiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainerContent = new System.Windows.Forms.SplitContainer();
             this.groupBoxCreate = new System.Windows.Forms.GroupBox();
             this.lblShortHelp = new System.Windows.Forms.Label();
@@ -61,6 +61,8 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.pictureBoxResult = new System.Windows.Forms.PictureBox();
             this.saveFileDialogImg = new System.Windows.Forms.SaveFileDialog();
+            this.CorrelationDimensionMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CorrelationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainSatusStrip.SuspendLayout();
             this.panelContent.SuspendLayout();
@@ -167,7 +169,8 @@
             // DimensionsMenu
             // 
             this.DimensionsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.minkowskiDimensionMenu});
+            this.minkowskiDimensionMenu,
+            this.CorrelationDimensionMenu});
             this.DimensionsMenu.Name = "DimensionsMenu";
             this.DimensionsMenu.Size = new System.Drawing.Size(91, 20);
             this.DimensionsMenu.Text = "Размерности";
@@ -177,7 +180,7 @@
             this.minkowskiDimensionMenu.Name = "minkowskiDimensionMenu";
             this.minkowskiDimensionMenu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.M)));
-            this.minkowskiDimensionMenu.Size = new System.Drawing.Size(226, 22);
+            this.minkowskiDimensionMenu.Size = new System.Drawing.Size(241, 22);
             this.minkowskiDimensionMenu.Tag = "0";
             this.minkowskiDimensionMenu.Text = "Минковского";
             this.minkowskiDimensionMenu.Click += new System.EventHandler(this.WindowShowDimension);
@@ -278,18 +281,19 @@
             // размерностьToolStripMenuItem
             // 
             this.размерностьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.минковскогоToolStripMenuItem});
+            this.MinkowskiToolStripMenuItem,
+            this.CorrelationToolStripMenuItem});
             this.размерностьToolStripMenuItem.Name = "размерностьToolStripMenuItem";
             this.размерностьToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
             this.размерностьToolStripMenuItem.Text = "Размерность";
             // 
-            // минковскогоToolStripMenuItem
+            // MinkowskiToolStripMenuItem
             // 
-            this.минковскогоToolStripMenuItem.Name = "минковскогоToolStripMenuItem";
-            this.минковскогоToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.минковскогоToolStripMenuItem.Tag = "0";
-            this.минковскогоToolStripMenuItem.Text = "Минковского";
-            this.минковскогоToolStripMenuItem.Click += new System.EventHandler(this.WindowShowDimension);
+            this.MinkowskiToolStripMenuItem.Name = "MinkowskiToolStripMenuItem";
+            this.MinkowskiToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.MinkowskiToolStripMenuItem.Tag = "0";
+            this.MinkowskiToolStripMenuItem.Text = "Минковского";
+            this.MinkowskiToolStripMenuItem.Click += new System.EventHandler(this.WindowShowDimension);
             // 
             // splitContainerContent
             // 
@@ -413,6 +417,23 @@
             this.saveFileDialogImg.Filter = "Image Files|*.jpeg;";
             this.saveFileDialogImg.Title = "Сохранить изображение как..";
             // 
+            // CorrelationDimensionMenu
+            // 
+            this.CorrelationDimensionMenu.Name = "CorrelationDimensionMenu";
+            this.CorrelationDimensionMenu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.K)));
+            this.CorrelationDimensionMenu.Size = new System.Drawing.Size(241, 22);
+            this.CorrelationDimensionMenu.Tag = "1";
+            this.CorrelationDimensionMenu.Text = "Корреляционная";
+            this.CorrelationDimensionMenu.Click += new System.EventHandler(this.WindowShowDimension);
+            // 
+            // CorrelationToolStripMenuItem
+            // 
+            this.CorrelationToolStripMenuItem.Name = "CorrelationToolStripMenuItem";
+            this.CorrelationToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.CorrelationToolStripMenuItem.Text = "Корреляционная";
+            this.CorrelationToolStripMenuItem.Click += new System.EventHandler(this.WindowShowDimension);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -480,8 +501,10 @@
         private System.Windows.Forms.ToolStripMenuItem множествоЖюлиаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem множествоМандельбротаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem размерностьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem минковскогоToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MinkowskiToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialogImg;
+        private System.Windows.Forms.ToolStripMenuItem CorrelationDimensionMenu;
+        private System.Windows.Forms.ToolStripMenuItem CorrelationToolStripMenuItem;
     }
 }
 

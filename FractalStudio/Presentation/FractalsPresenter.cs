@@ -27,8 +27,24 @@ namespace FractalStudio.Presentation
             _view.CreateMinkowskiDimesion += ViewCreateMinkowskiDimesion;
             _view.CreateJulia += ViewCreateJulia;
             _view.CreateMandelbrot += ViewCreateMandelbrot;
+            _view.CreateCorrelationDimesion += ViewCreateCorrelationDimesion;
             _view.Start += ViewStart;
             _view.Stop += ViewStop;
+        }
+
+        private void ViewCreateCorrelationDimesion(object sender, CreateCorrelationEventArgs e)
+        {
+            var initData = new CorrelationInitData()
+            {
+                FileNames = e.FileNames,
+                StartSize = e.StartSize,
+                FinishSize = e.FinishSize,
+                Step = e.Step
+            };
+
+            _dimension = _fractalSource.GetDimension(initData);
+
+            AddEventsDimension();
         }
 
         private void ViewCreateMandelbrot(object sender, CreateMandelbrotEventArgs e)

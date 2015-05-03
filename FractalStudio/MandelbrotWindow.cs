@@ -14,7 +14,7 @@ namespace FractalStudio
     {
         private IGroupCreate _groupCrt;
         private EventHandler<CreateMandelbrotEventArgs> _create;
-
+        private CreateMandelbrotEventArgs args;
 
         public MandelbrotWindow(EventHandler<CreateMandelbrotEventArgs> create)
         {
@@ -92,15 +92,16 @@ namespace FractalStudio
 
         private void BtnOkClick(object sender, EventArgs e)
         {
-            //this.Hide();
+            
+
             _groupCrt.ContainerGroup.Controls.Clear();
             _groupCrt.ContainerGroup.Text = this.Text;
-            panelJulia.Controls.Remove(btnCancel);
-            panelJulia.Location = new System.Drawing.Point(6, panelJulia.Location.Y);
+            panelMandelbrot.Controls.Remove(btnCancel);
+            panelMandelbrot.Location = new System.Drawing.Point(6, panelMandelbrot.Location.Y);
             btnOk.Left = btnCancel.Left;
-            _groupCrt.ContainerGroup.Controls.Add(panelJulia);
+            _groupCrt.ContainerGroup.Controls.Add(panelMandelbrot);
 
-            var args = new CreateMandelbrotEventArgs
+            args = new CreateMandelbrotEventArgs
             {
                 ComplexFunction = txtFz.Text,
                 Xmin = Convert.ToDouble(numericUpDownXmin.Value),
@@ -112,6 +113,7 @@ namespace FractalStudio
                 Fill = radioButtonFill.Checked
             };
 
+            
             _create(this, args);
             this.Close();
 

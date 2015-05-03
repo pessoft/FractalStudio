@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Drawing;
 using Fractals.Tools;
-using System.Linq;
 
 namespace Fractals.Dimension
 {
-    /// <summary>
-    /// Размернеость Минковского
-    /// </summary>
-    public class MinkowskiDimension : IDimension
+    public class CorrelationDimension : IDimension
     {
         #region Поля и события класса
 
@@ -28,13 +25,13 @@ namespace Fractals.Dimension
         #endregion
 
         /// <summary>
-        /// Создает экземпляр класс размерности Минковского
+        /// Создает экземпляр класс Корреляционной размерности
         /// </summary>
         /// <param name="fileNames">Коллекция адресов изображений</param>
         /// <param name="startSize">Начальный размер сетик</param>
         /// <param name="finishSize">Конечный размер сетки</param>
         /// <param name="step">Шаг изменения сетки</param>
-        public MinkowskiDimension(List<string> fileNames, int startSize, int finishSize, int step = 1)
+        public CorrelationDimension(List<string> fileNames, int startSize, int finishSize, int step = 1)
         {
             _fileNames = fileNames;
             _startSize = startSize;
@@ -43,10 +40,9 @@ namespace Fractals.Dimension
             _min = 0;
             _max = fileNames.Count;
         }
-       
+
         public void Start()
         {
-
             OnStarting();
             List<CompletedDimensionData> result = new List<CompletedDimensionData>();
 
@@ -59,10 +55,9 @@ namespace Fractals.Dimension
 
                 OnChangedImage(imgPath);
 
-                ++_value;
-                OnChangedProgress();
+                
 
-                double mink;
+                double correlation;
                 int lastSymb;
                 string name;
 
@@ -78,12 +73,11 @@ namespace Fractals.Dimension
                     c++;
                 }
 
-                //mink = NormalEquations2d(x, y);
-                mink = OrdinaryLeastSquares(x, y);
+                correlation = OrdinaryLeastSquares(x, y);
                 lastSymb = imgPath.LastIndexOf(@"\") + 1;
                 name = imgPath.Substring(lastSymb, imgPath.Length - lastSymb);
 
-                CompletedDimensionData CompletedResult = new CompletedDimensionData() { Dim = Math.Round(mink, 2), PathFile = imgPath, ShortName = name };
+                CompletedDimensionData CompletedResult = new CompletedDimensionData() { Dim = Math.Round(correlation, 2), PathFile = imgPath, ShortName = name };
 
                 result.Add(CompletedResult);
 
@@ -94,7 +88,12 @@ namespace Fractals.Dimension
             _bwContour = null;
         }
 
-        #region Нахождение размерности Минковского методом наименьших квадратов
+        private int Heaviside(double value)
+        {
+            return value < 0 ? 0 : 1;
+        }
+
+        #region Нахождение корреляционноый размерности методом наименьших квадратов
         private Dictionary<double, double> CountingDimension(Bitmap img)
         {
             Dictionary<double, double> baList = new Dictionary<double, double>();
@@ -102,55 +101,61 @@ namespace Fractals.Dimension
             int height = img.Height;
             int width = img.Width;
             bool[,] colorImg = new bool[width, height];
+            List<Point> points;
             bool[,] filledBoxes;
-            
-               
-               //Получаем датасет цветов изображения для ускорения работы
-               for (int x = 0; x < width; x++)
-               {
-                   for (int y = 0; y < height; y++)
-                   {
-                       if (img.GetPixel(x, y).ToArgb() != Color.White.ToArgb())
-                           colorImg[x, y] = true;
-                   }
-               }
-               
-            //Имитация предела с изменение размера ячейки epsilon
-            for (int epsilon = _startSize; epsilon <= _finishSize; epsilon += _step)
+
+            points = new List<Point>();
+            //Получаем датасет цветов изображения для ускорения работы
+            for (int x = 0; x < width; x++)
             {
-                int hCount = img.Height / (epsilon),
-                    wCount = img.Width / (epsilon );
-
-                int countEpsilon = 0;
-
-                filledBoxes = new bool[wCount + (img.Width > wCount *epsilon ? 1 : 0), hCount + (img.Height > hCount *epsilon ? 1 : 0)];
-
-                for (int x = 0; x < width; ++x)
-                    for (int y = 0; y < height; ++y)
-                    {
-                        if (colorImg[x, y])
-                        {
-                            int xBox = x/ (epsilon);
-                            int yBox = y / (epsilon);
-
-                            filledBoxes[xBox, yBox] = true;
-                        }
-                    }
-
-
-                for (int i = 0; i < filledBoxes.GetLength(0); i++)
+                for (int y = 0; y < height; y++)
                 {
-                    for (int j = 0; j < filledBoxes.GetLength(1); j++)
+                    if (img.GetPixel(x, y).ToArgb() != Color.White.ToArgb())
                     {
-                        if (filledBoxes[i, j])
-                        {
-                            ++countEpsilon;
-                        }
+                        colorImg[x, y] = true;
+                        points.Add(new Point(x, y));
                     }
                 }
+            }
 
-                baList.Add(Math.Log(1d / epsilon), Math.Log(countEpsilon));
 
+
+            int sum = 0; double ttt = 0;int count = points.Count;
+            //Имитация предела с изменение размера ячейки epsilon
+            for (int epsilon = 5; epsilon <=100; epsilon += _step)
+            {
+                sum = 0;
+
+                for(int i =0;i< count; ++i)
+                    for (int j=0;j< count; ++j)
+                    {
+                        if (points[i] != points[j])
+                        {
+                           ttt = Math.Sqrt(Math.Pow(points[j].X - points[i].X, 2) + Math.Pow(points[j].Y - points[i].Y, 2));
+                            sum += Heaviside(epsilon - ttt);
+                        }
+                    }
+                //for (int x = 0; x < width; ++x)
+                //    for (int y = 0; y < height && x!=y; ++y)
+                //    {
+                //        if(colorImg[x,y])
+                //           for (int i = 0; i < width && i!= x; ++i)
+                //           {
+                //               for (int j = 0; j < height && j!= y; ++j)
+                //               {
+                //                    if (colorImg[i, j])
+                //                    {
+                //                        double ttt = Math.Abs(Math.Sqrt(Math.Pow(i - x, 2) + Math.Pow(j - y, 2)));
+                //                        sum += Heaviside(epsilon - ttt);
+                //                    }
+                //                }
+                //            }
+
+                //    }
+                ++_value;
+                OnChangedProgress();
+                baList.Add(Math.Log(epsilon), Math.Log(1/Math.Pow(points.Count,2) *sum));
+                
                 //_value = _value + _step >= _finishSize-_startSize ? _value = _finishSize - _startSize : _value + _step;
 
                 //OnChangedProgress();
@@ -158,6 +163,8 @@ namespace Fractals.Dimension
 
             return baList;
         }
+
+        
 
         private Dictionary<double, double> CountingDimension2(Bitmap img)
         {
@@ -170,7 +177,7 @@ namespace Fractals.Dimension
             bool[,] colorImg = new bool[width, height];
             bool[,] filledBoxes;
 
-            
+
             //Получаем датасет цветов изображения для ускорения работы
             for (int x = 0; x < width; x++)
             {
@@ -182,10 +189,10 @@ namespace Fractals.Dimension
             }
             #endregion
             //Имитация предела с изменение размера ячейки epsilon
-            
-            for (int epsilon = _startSize; epsilon <= _finishSize; epsilon+=_step)
+
+            for (int epsilon = _startSize; epsilon <= _finishSize; epsilon += _step)
             {
-                int hCount = height/ epsilon,
+                int hCount = height / epsilon,
                     wCount = width / epsilon;
 
                 int countEpsilon = 0;
@@ -195,9 +202,9 @@ namespace Fractals.Dimension
                 for (int i = 1; i < wCount; ++i)
                     for (int j = 1; j < hCount; ++j)
                     {
-                        for (int x = (i - 1) * epsilon+1 ; x <= i * epsilon; ++x)
+                        for (int x = (i - 1) * epsilon + 1; x <= i * epsilon; ++x)
                         {
-                            for (int y = (j - 1)* epsilon+1 ; y <= j * epsilon; ++y)
+                            for (int y = (j - 1) * epsilon + 1; y <= j * epsilon; ++y)
                             {
                                 if (colorImg[x, y])
                                 {
@@ -233,7 +240,7 @@ namespace Fractals.Dimension
             return baList;
         }
 
-        //private double OrdinaryLeastSquares(double[] x, double[] y)
+        //private double NormalEquations2d(double[] x, double[] y)
         //{
         //    //x^t * x
         //    double[,] xtx = new double[2, 2];
@@ -284,9 +291,9 @@ namespace Fractals.Dimension
         /// <returns></returns>
         private double OrdinaryLeastSquares(double[] x, double[] y)
         {
-            double k=0;
+            double k = 0;
             double sumXY = 0, sumX = 0, sumY = 0, sumSqrX = 0, sqrSumX = 0;
-            int n = x.Length ;
+            int n = x.Length;
             sumX = x.Sum();
             sumY = y.Sum();
             sqrSumX = sumX * sumX;
@@ -324,8 +331,11 @@ namespace Fractals.Dimension
         }
         private void OnChangedProgress()
         {
+            //if (ChangedProgress != null)
+            //    ChangedProgress(this, new ChangedProgressEventArgs { Minimum = _min, Maximum = _max, Value = _value });
             if (ChangedProgress != null)
-                ChangedProgress(this, new ChangedProgressEventArgs { Minimum = _min, Maximum = _max, Value = _value });
+                ChangedProgress(this, new ChangedProgressEventArgs { Minimum = _min, Maximum = 101, Value = _value });
+            // ChangedProgress(this, new ChangedProgressEventArgs { Minimum = _min, Maximum = _max, Value = _value });
         }
 
 

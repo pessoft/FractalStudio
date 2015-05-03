@@ -10,6 +10,7 @@ namespace FractalStudio
         event EventHandler<CreateLsystemEventArgs> CreateLsystem;
         event EventHandler<CreateJuliaEventArgs> CreateJulia;
         event EventHandler<CreateMinkowskiEventArgs> CreateMinkowskiDimesion;
+        event EventHandler<CreateCorrelationEventArgs> CreateCorrelationDimesion;
         event EventHandler<CreateMandelbrotEventArgs> CreateMandelbrot;
         event EventHandler Start;
         event EventHandler Stop;

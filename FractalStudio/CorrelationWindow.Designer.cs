@@ -1,6 +1,6 @@
 ﻿namespace FractalStudio
 {
-    partial class MinkowskiWindow
+    partial class CorrelationWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MinkowskiWindow));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CorrelationWindow));
             this.groupBoxMinkowskiDimension = new System.Windows.Forms.GroupBox();
             this.pictureShortHelp = new System.Windows.Forms.PictureBox();
             this.panelMinkowskiDimension = new System.Windows.Forms.Panel();
@@ -63,12 +63,12 @@
             this.groupBoxMinkowskiDimension.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBoxMinkowskiDimension.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxMinkowskiDimension.ForeColor = System.Drawing.SystemColors.Info;
-            this.groupBoxMinkowskiDimension.Location = new System.Drawing.Point(13, 10);
+            this.groupBoxMinkowskiDimension.Location = new System.Drawing.Point(13, 9);
             this.groupBoxMinkowskiDimension.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBoxMinkowskiDimension.Name = "groupBoxMinkowskiDimension";
             this.groupBoxMinkowskiDimension.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBoxMinkowskiDimension.Size = new System.Drawing.Size(273, 165);
-            this.groupBoxMinkowskiDimension.TabIndex = 0;
+            this.groupBoxMinkowskiDimension.TabIndex = 1;
             this.groupBoxMinkowskiDimension.TabStop = false;
             this.groupBoxMinkowskiDimension.Text = "Конструктор";
             // 
@@ -82,7 +82,6 @@
             this.pictureShortHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureShortHelp.TabIndex = 3;
             this.pictureShortHelp.TabStop = false;
-            this.toolTipShortHepl.SetToolTip(this.pictureShortHelp, resources.GetString("pictureShortHelp.ToolTip"));
             // 
             // panelMinkowskiDimension
             // 
@@ -152,8 +151,6 @@
             this.btnOpen.Size = new System.Drawing.Size(59, 26);
             this.btnOpen.TabIndex = 3;
             this.btnOpen.Text = "...";
-            this.toolTipSizeEpsilon.SetToolTip(this.btnOpen, "Выберети одно или несколько изображений, \r\nпо которым нужно расчитать размерность" +
-        "");
             this.btnOpen.UseVisualStyleBackColor = false;
             this.btnOpen.Click += new System.EventHandler(this.btnOpenClick);
             // 
@@ -196,7 +193,6 @@
             this.numericUpDownStep.Size = new System.Drawing.Size(59, 25);
             this.numericUpDownStep.TabIndex = 2;
             this.numericUpDownStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTipSizeEpsilon.SetToolTip(this.numericUpDownStep, "Шаг изменения сетки");
             this.numericUpDownStep.Value = new decimal(new int[] {
             1,
             0,
@@ -220,7 +216,6 @@
             this.numericUpDownMax.Size = new System.Drawing.Size(59, 25);
             this.numericUpDownMax.TabIndex = 1;
             this.numericUpDownMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTipSizeEpsilon.SetToolTip(this.numericUpDownMax, "Конечный размер сетки");
             this.numericUpDownMax.Value = new decimal(new int[] {
             100,
             0,
@@ -234,7 +229,6 @@
             this.numericUpDownMin.Size = new System.Drawing.Size(59, 25);
             this.numericUpDownMin.TabIndex = 0;
             this.numericUpDownMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTipSizeEpsilon.SetToolTip(this.numericUpDownMin, "Начальный размер сетки\r\n");
             this.numericUpDownMin.Value = new decimal(new int[] {
             1,
             0,
@@ -263,23 +257,21 @@
             this.openFileDialogImgDimension.Multiselect = true;
             this.openFileDialogImgDimension.Title = "Выбор изображений";
             // 
-            // MinkowskiWindow
+            // CorrelationWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(299, 182);
             this.Controls.Add(this.groupBoxMinkowskiDimension);
-            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "MinkowskiWindow";
+            this.Name = "CorrelationWindow";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Размерность Минковского";
+            this.Text = "Корреляционная размерность";
             this.groupBoxMinkowskiDimension.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureShortHelp)).EndInit();
             this.panelMinkowskiDimension.ResumeLayout(false);
@@ -295,18 +287,18 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBoxMinkowskiDimension;
+        private System.Windows.Forms.PictureBox pictureShortHelp;
         private System.Windows.Forms.Panel panelMinkowskiDimension;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.GroupBox SizeEpsilon;
-        private System.Windows.Forms.NumericUpDown numericUpDownMin;
+        private System.Windows.Forms.Button btnOpen;
+        private System.Windows.Forms.Label lblStep;
+        private System.Windows.Forms.Label lblMax;
         private System.Windows.Forms.Label lblMin;
         private System.Windows.Forms.NumericUpDown numericUpDownStep;
         private System.Windows.Forms.NumericUpDown numericUpDownMax;
-        private System.Windows.Forms.Label lblStep;
-        private System.Windows.Forms.Label lblMax;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Button btnOpen;
-        private System.Windows.Forms.PictureBox pictureShortHelp;
+        private System.Windows.Forms.NumericUpDown numericUpDownMin;
         private System.Windows.Forms.ToolTip toolTipShortHepl;
         private System.Windows.Forms.ToolTip toolTipSizeEpsilon;
         private System.Windows.Forms.OpenFileDialog openFileDialogImgDimension;

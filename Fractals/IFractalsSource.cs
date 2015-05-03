@@ -36,7 +36,7 @@ namespace Fractals
         /// <param name="dimensionInit">Исходные данные</param>
         /// <returns>Возвращает интерфейс работы с размерностью Минковского</returns>
         IDimension GetDimension(MinkowskiInitData dimensionInit);
-
+        IDimension GetDimension(CorrelationInitData dimensionInit);
         #endregion
     }
 }

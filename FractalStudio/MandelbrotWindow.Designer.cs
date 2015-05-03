@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MandelbrotWindow));
-            this.groupCreateJulia = new System.Windows.Forms.GroupBox();
-            this.panelJulia = new System.Windows.Forms.Panel();
+            this.groupCreateMandelbrot = new System.Windows.Forms.GroupBox();
+            this.panelMandelbrot = new System.Windows.Forms.Panel();
             this.groupBoxFill = new System.Windows.Forms.GroupBox();
             this.radioButtonNotFill = new System.Windows.Forms.RadioButton();
             this.radioButtonFill = new System.Windows.Forms.RadioButton();
@@ -55,8 +55,8 @@
             this.toolTipYminMax = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipShortHelp = new System.Windows.Forms.ToolTip(this.components);
             this.placeholderMandelbrot = new FractalStudio.Placeholder();
-            this.groupCreateJulia.SuspendLayout();
-            this.panelJulia.SuspendLayout();
+            this.groupCreateMandelbrot.SuspendLayout();
+            this.panelMandelbrot.SuspendLayout();
             this.groupBoxFill.SuspendLayout();
             this.groupBoxNoName.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNoName)).BeginInit();
@@ -72,35 +72,35 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureShortHelp)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupCreateJulia
+            // groupCreateMandelbrot
             // 
-            this.groupCreateJulia.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.groupCreateJulia.Controls.Add(this.panelJulia);
-            this.groupCreateJulia.Controls.Add(this.pictureShortHelp);
-            this.groupCreateJulia.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupCreateJulia.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupCreateJulia.ForeColor = System.Drawing.SystemColors.Info;
-            this.groupCreateJulia.Location = new System.Drawing.Point(12, 5);
-            this.groupCreateJulia.Name = "groupCreateJulia";
-            this.groupCreateJulia.Size = new System.Drawing.Size(288, 292);
-            this.groupCreateJulia.TabIndex = 1;
-            this.groupCreateJulia.TabStop = false;
-            this.groupCreateJulia.Text = "Конструктор";
+            this.groupCreateMandelbrot.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.groupCreateMandelbrot.Controls.Add(this.panelMandelbrot);
+            this.groupCreateMandelbrot.Controls.Add(this.pictureShortHelp);
+            this.groupCreateMandelbrot.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupCreateMandelbrot.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupCreateMandelbrot.ForeColor = System.Drawing.SystemColors.Info;
+            this.groupCreateMandelbrot.Location = new System.Drawing.Point(12, 5);
+            this.groupCreateMandelbrot.Name = "groupCreateMandelbrot";
+            this.groupCreateMandelbrot.Size = new System.Drawing.Size(288, 292);
+            this.groupCreateMandelbrot.TabIndex = 1;
+            this.groupCreateMandelbrot.TabStop = false;
+            this.groupCreateMandelbrot.Text = "Конструктор";
             // 
-            // panelJulia
+            // panelMandelbrot
             // 
-            this.panelJulia.Controls.Add(this.groupBoxFill);
-            this.panelJulia.Controls.Add(this.groupBoxNoName);
-            this.panelJulia.Controls.Add(this.groupBoxIteration);
-            this.panelJulia.Controls.Add(this.btnOk);
-            this.panelJulia.Controls.Add(this.groupBoxFz);
-            this.panelJulia.Controls.Add(this.btnCancel);
-            this.panelJulia.Controls.Add(this.groupBox1);
-            this.panelJulia.Controls.Add(this.groupBoxX);
-            this.panelJulia.Location = new System.Drawing.Point(10, 28);
-            this.panelJulia.Name = "panelJulia";
-            this.panelJulia.Size = new System.Drawing.Size(235, 258);
-            this.panelJulia.TabIndex = 7;
+            this.panelMandelbrot.Controls.Add(this.groupBoxFill);
+            this.panelMandelbrot.Controls.Add(this.groupBoxNoName);
+            this.panelMandelbrot.Controls.Add(this.groupBoxIteration);
+            this.panelMandelbrot.Controls.Add(this.btnOk);
+            this.panelMandelbrot.Controls.Add(this.groupBoxFz);
+            this.panelMandelbrot.Controls.Add(this.btnCancel);
+            this.panelMandelbrot.Controls.Add(this.groupBox1);
+            this.panelMandelbrot.Controls.Add(this.groupBoxX);
+            this.panelMandelbrot.Location = new System.Drawing.Point(10, 28);
+            this.panelMandelbrot.Name = "panelMandelbrot";
+            this.panelMandelbrot.Size = new System.Drawing.Size(235, 258);
+            this.panelMandelbrot.TabIndex = 7;
             // 
             // groupBoxFill
             // 
@@ -456,7 +456,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(310, 301);
-            this.Controls.Add(this.groupCreateJulia);
+            this.Controls.Add(this.groupCreateMandelbrot);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -465,8 +465,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Mandelbrot";
-            this.groupCreateJulia.ResumeLayout(false);
-            this.panelJulia.ResumeLayout(false);
+            this.groupCreateMandelbrot.ResumeLayout(false);
+            this.panelMandelbrot.ResumeLayout(false);
             this.groupBoxFill.ResumeLayout(false);
             this.groupBoxFill.PerformLayout();
             this.groupBoxNoName.ResumeLayout(false);
@@ -488,8 +488,8 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupCreateJulia;
-        private System.Windows.Forms.Panel panelJulia;
+        private System.Windows.Forms.GroupBox groupCreateMandelbrot;
+        private System.Windows.Forms.Panel panelMandelbrot;
         private System.Windows.Forms.GroupBox groupBoxFill;
         private System.Windows.Forms.RadioButton radioButtonNotFill;
         private System.Windows.Forms.RadioButton radioButtonFill;

@@ -85,6 +85,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CorrelationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CorrelationWindow.Designer.cs">
+      <DependentUpon>CorrelationWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="MandelbrotWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,7 @@
     <Compile Include="MinkowskiWindow.Designer.cs">
       <DependentUpon>MinkowskiWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="SourceArgs\CreateCorrelationEventArgs.cs" />
     <Compile Include="SourceArgs\CreateJuliaEventArgs.cs" />
     <Compile Include="SourceArgs\CreateLsystemEventArgs.cs" />
     <Compile Include="SourceArgs\CreateMandelbrotEventArgs.cs" />
@@ -128,6 +135,9 @@
     <Compile Include="Presentation\FractalsPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CorrelationWindow.resx">
+      <DependentUpon>CorrelationWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="JuliaWindow.resx">
       <DependentUpon>JuliaWindow.cs</DependentUpon>
     </EmbeddedResource>

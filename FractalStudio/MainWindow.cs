@@ -19,6 +19,7 @@ namespace FractalStudio
         public event EventHandler<CreateJuliaEventArgs> CreateJulia;
         public event EventHandler<CreateMandelbrotEventArgs> CreateMandelbrot;
         public event EventHandler<CreateMinkowskiEventArgs> CreateMinkowskiDimesion;
+        public event EventHandler<CreateCorrelationEventArgs> CreateCorrelationDimesion;
 
         public event EventHandler Start;
         public event EventHandler Stop;
@@ -242,6 +243,7 @@ namespace FractalStudio
             switch (tag)
             {
                 case 0: _windowModal = new MinkowskiWindow(CreateMinkowski); break;
+                case 1: _windowModal = new CorrelationWindow(CreateCorrelation); break;
             }
 
             if (_windowModal != null)
@@ -280,6 +282,14 @@ namespace FractalStudio
 
         }
 
+        private void CreateCorrelation(object sender, CreateCorrelationEventArgs e)
+        {
+            btnStart.Enabled = true;
+
+            if (CreateCorrelationDimesion != null)
+                CreateCorrelationDimesion(this, e);
+
+        }
 
         private void btnStartClick(object sender, EventArgs e)
         {

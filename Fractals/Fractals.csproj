@@ -47,12 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dimension\CorrelationDimension.cs" />
     <Compile Include="Dimension\IDimension.cs" />
     <Compile Include="Dimension\MinkowskiDimension.cs" />
     <Compile Include="FractalsArgs\CompletedFractalEventArgs.cs" />
     <Compile Include="FractalsArgs\CompletedDimensionData.cs" />
     <Compile Include="FractalsArgs\CompletedDimensionArgs.cs" />
     <Compile Include="FractalsArgs\ChangedImageEventAgrs.cs" />
+    <Compile Include="FractalsArgs\CorrelationInitData.cs" />
     <Compile Include="FractalsArgs\JuliaInitData.cs" />
     <Compile Include="FractalsArgs\LsysInitData.cs" />
     <Compile Include="FractalsArgs\MandelbrotInitData.cs" />

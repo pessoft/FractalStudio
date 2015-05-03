@@ -18,6 +18,14 @@ namespace Fractals
             return dimension;
         }
 
+        public IDimension GetDimension(CorrelationInitData dimensionInit)
+        {
+            var dimension = new CorrelationDimension
+                (dimensionInit.FileNames, dimensionInit.StartSize, dimensionInit.FinishSize, dimensionInit.Step);
+
+            return dimension;
+        }
+
         public IFractal GetFractal(JuliaInitData fractalInit)
         {
             var julia = new Julia(fractalInit.xyScale, fractalInit.Iteration,fractalInit.NoName,fractalInit.Fill,fractalInit.ComplexFunction);

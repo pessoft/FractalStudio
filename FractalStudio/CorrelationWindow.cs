@@ -10,16 +10,17 @@ using System.Windows.Forms;
 
 namespace FractalStudio
 {
-    public partial class MinkowskiWindow : Form, IWindowModal
+    public partial class CorrelationWindow : Form, IWindowModal
     {
 
+
         private IGroupCreate _groupCrt;
-        private EventHandler<CreateMinkowskiEventArgs> _create;
-        private CreateMinkowskiEventArgs args;
-        public MinkowskiWindow(EventHandler<CreateMinkowskiEventArgs> create)
+        private EventHandler<CreateCorrelationEventArgs> _create;
+        private List<string> _filePaths;
+        public CorrelationWindow(EventHandler<CreateCorrelationEventArgs> create)
         {
             InitializeComponent();
-            args = new CreateMinkowskiEventArgs() ;
+            
             _create = create;
         }
 
@@ -34,7 +35,7 @@ namespace FractalStudio
         {
             if (openFileDialogImgDimension.ShowDialog() == DialogResult.OK)
             {
-                args.FileNames = openFileDialogImgDimension.FileNames.ToList();
+                _filePaths = openFileDialogImgDimension.FileNames.ToList();
                 btnOk.Enabled = true;
             }
 
@@ -47,9 +48,13 @@ namespace FractalStudio
 
         private void btnOkClick(object sender, EventArgs e)
         {
-            args.StartSize = Convert.ToInt32(numericUpDownMin.Value);
-            args.FinishSize = Convert.ToInt32(numericUpDownMax.Value);
-            args.Step = Convert.ToInt32(numericUpDownStep.Value);
+            var args = new CreateCorrelationEventArgs()
+            {
+                StartSize = Convert.ToInt32(numericUpDownMin.Value),
+                FinishSize = Convert.ToInt32(numericUpDownMax.Value),
+                Step = Convert.ToInt32(numericUpDownStep.Value),
+                FileNames = _filePaths
+            };
 
             _create(this, args);
 
@@ -59,13 +64,10 @@ namespace FractalStudio
             panelMinkowskiDimension.Controls.Remove(btnCancel);
 
             _groupCrt.ContainerGroup.Controls.Add(panelMinkowskiDimension);
-            _groupCrt.ContainerGroup.Text = "Размерность Минковского";
+            _groupCrt.ContainerGroup.Text = this.Text;
 
             this.Close();
         }
 
-    
     }
-
-    
 }
