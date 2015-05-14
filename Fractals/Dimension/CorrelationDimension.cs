@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
 using Fractals.Tools;
-
+using System.Numerics;
 namespace Fractals.Dimension
 {
     public class CorrelationDimension : IDimension
@@ -61,7 +61,7 @@ namespace Fractals.Dimension
                 int lastSymb;
                 string name;
 
-                Dictionary<double, double> baList = CountingDimension(_bwContour);
+                Dictionary<double, double> baList = CountingDimension3(_bwContour);
                 double[] y = new double[baList.Count];
                 double[] x = new double[baList.Count];
 
@@ -126,32 +126,22 @@ namespace Fractals.Dimension
             {
                 sum = 0;
 
-                for(int i =0;i< count; ++i)
-                    for (int j=0;j< count; ++j)
-                    {
-                        if (points[i] != points[j])
-                        {
-                           ttt = Math.Sqrt(Math.Pow(points[j].X - points[i].X, 2) + Math.Pow(points[j].Y - points[i].Y, 2));
-                            sum += Heaviside(epsilon - ttt);
-                        }
-                    }
-                //for (int x = 0; x < width; ++x)
-                //    for (int y = 0; y < height && x!=y; ++y)
-                //    {
-                //        if(colorImg[x,y])
-                //           for (int i = 0; i < width && i!= x; ++i)
-                //           {
-                //               for (int j = 0; j < height && j!= y; ++j)
-                //               {
-                //                    if (colorImg[i, j])
-                //                    {
-                //                        double ttt = Math.Abs(Math.Sqrt(Math.Pow(i - x, 2) + Math.Pow(j - y, 2)));
-                //                        sum += Heaviside(epsilon - ttt);
-                //                    }
-                //                }
-                //            }
+                foreach (var point in points.AsParallel())
+                {
+                    sum+=points.AsParallel().Count(p => inSet(p, point, epsilon));
+                }
 
+                //foreach (var pointI in points)
+                //{
+                //    foreach (var pointJ in points)
+                //    {
+                //        if (pointI != pointJ)
+                //        {
+                //            ttt = Math.Sqrt(Math.Pow(pointJ.X - pointI.X, 2) + Math.Pow(pointJ.Y - pointI.Y, 2));
+                //            sum += Heaviside(epsilon - ttt);
+                //        }
                 //    }
+                //}
                 ++_value;
                 OnChangedProgress();
                 baList.Add(Math.Log(epsilon), Math.Log(1/Math.Pow(points.Count,2) *sum));
@@ -164,73 +154,178 @@ namespace Fractals.Dimension
             return baList;
         }
 
-        
-
         private Dictionary<double, double> CountingDimension2(Bitmap img)
         {
-            #region
-
             Dictionary<double, double> baList = new Dictionary<double, double>();
             Bitmap bmp = BitmapBinary.ToBlackWhite(img);
-            int height = bmp.Height;
-            int width = bmp.Width;
+            int height = img.Height;
+            int width = img.Width;
             bool[,] colorImg = new bool[width, height];
+            List<Point> points;
             bool[,] filledBoxes;
+            bool flagFor = false;
+            points = new List<Point>();
+            //Получаем датасет цветов изображения для ускорения работы
+            Dictionary<Point, int> countIteration = new Dictionary<Point, int>();
+            
+                
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    if (img.GetPixel(x, y).ToArgb() != Color.White.ToArgb())
+                    {
+                        colorImg[x, y] = true;
+                        Point point = new Point(x, y);
+                        points.Add(point);
+                        countIteration.Add(point, 0);
+                    }
+                }
+            }
 
 
+            int sum = 0; double ttt = 0; int count = points.Count;
+            int countInRadius=0;int iStart = 0, jStart = 0, iEnd = 0, jEnd = 0;
+            List<Point> tmpPoints;
+
+           
+            int jS=0,jE = 0,iS=0,iE=0;
+            
+            double eDSqr = 0;
+            //Имитация предела с изменение размера ячейки epsilon
+            for (int epsilon = 5; epsilon <= 100; epsilon += _step)
+            {
+                sum = 0;
+                points.AsParallel().ForAll(point =>
+                // for(int ind=0;ind<points.Count;++ind)
+                {
+                    // Point point = points[ind];
+                    countInRadius = 0;
+                    eDSqr = epsilon / Math.Sqrt(2);
+                    iStart = point.X - epsilon < 0 ? 0 : point.X - epsilon;
+                    jStart = point.Y - epsilon < 0 ? 0 : point.Y - epsilon;
+                    iEnd = point.X + epsilon > width - 1 ? width - 1 : point.X + epsilon;
+                    jEnd = point.Y + epsilon > height - 1 ? height - 1 : point.Y + epsilon;
+                    // tmpPoints = new List<Point>();
+                    iS = (int)(point.X - eDSqr) + 1;
+                    iE = (int)(point.X + eDSqr) - 1;
+                    jS = (int)(point.Y - eDSqr) + 1;
+                    jE = (int)(point.Y + eDSqr) - 1;
+
+                    for (int i = iStart; i <= iEnd; ++i)
+                    {
+                        for (int j = jStart; j <= jEnd; ++j)
+                        {
+                            if (flagFor && ((j > jS && j < jE) && (i > iS && i < iE)))
+                            {
+                                j = jE;
+                                continue;
+                            }
+
+                            if (colorImg[i, j])
+                            {
+                                if ((new Point(i, j) != point) && (!flagFor || !inSet(i, j, point, epsilon - _step)) && inSet(i, j, point, epsilon))
+                                {
+                                    ++countInRadius;
+                                }
+                            }
+                        }
+                    }
+
+
+                    countIteration[point] = countInRadius + countIteration[point];
+                    sum += countIteration[point];
+                    //sum += countInRadius;
+
+                });
+
+                ++_value;
+                OnChangedProgress();
+                baList.Add(Math.Log(epsilon), Math.Log(1 / Math.Pow(count, 2) * sum));
+                flagFor = true;
+            }
+
+            return baList;
+        }
+
+        private Dictionary<double, double> CountingDimension3(Bitmap img)
+        {
+            Dictionary<double, double> baList = new Dictionary<double, double>();
+            Dictionary<Point, ulong> countList;
+            int countPoint;
+            Bitmap bmp = BitmapBinary.ToBlackWhite(img);
+            int height = img.Height;
+            int width = img.Width;
+            bool[,] colorImg = new bool[width, height];
+            List<Point> points;
+            bool[,] filledBoxes;
+            bool flagFor = false;
+            points = new List<Point>();
             //Получаем датасет цветов изображения для ускорения работы
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    if (bmp.GetPixel(x, y).ToArgb() == Color.Black.ToArgb())
+                    if (img.GetPixel(x, y).ToArgb() != Color.White.ToArgb())
+                    {
                         colorImg[x, y] = true;
+                        points.Add(new Point(x, y));
+                    }
                 }
             }
-            #endregion
-            //Имитация предела с изменение размера ячейки epsilon
 
-            for (int epsilon = _startSize; epsilon <= _finishSize; epsilon += _step)
+            ulong sum = 0; int count = points.Count;
+            //Имитация предела с изменение размера ячейки epsilon
+            for (int epsilon = 5; epsilon <= 100; epsilon += _step)
             {
+                countList = new Dictionary<Point, ulong>();
                 int hCount = height / epsilon,
                     wCount = width / epsilon;
-
+                sum = 0;
                 int countEpsilon = 0;
+                countPoint = 0;
+                filledBoxes = new bool[wCount + (img.Width > wCount * epsilon ? 1 : 0), hCount + (img.Height > hCount * epsilon ? 1 : 0)];
 
-                filledBoxes = new bool[wCount, hCount];
-
-                for (int i = 1; i < wCount; ++i)
-                    for (int j = 1; j < hCount; ++j)
+                for (int x = 0; x < width; ++x)
+                    for (int y = 0; y < height; ++y)
                     {
-                        for (int x = (i - 1) * epsilon + 1; x <= i * epsilon; ++x)
+                        if (colorImg[x, y])
                         {
-                            for (int y = (j - 1) * epsilon + 1; y <= j * epsilon; ++y)
+                            int xBox = x / (epsilon);
+                            int yBox = y / (epsilon);
+
+                            if (countList.ContainsKey(new Point(xBox, yBox)))
                             {
-                                if (colorImg[x, y])
-                                {
-                                    filledBoxes[i, j] = true;
-                                    break;
-                                }
+                                ++countList[new Point(xBox, yBox)];
                             }
-                            if (filledBoxes[i, j])
-                                break;
+                            else
+                            {
+                                countList.Add(new Point(xBox, yBox), 1);
+                            }
                         }
-
                     }
 
 
-                for (int i = 1; i < filledBoxes.GetLength(0); i++)
+                //for (int i = 0; i < filledBoxes.GetLength(0); i++)
+                //{
+                //    for (int j = 0; j < filledBoxes.GetLength(1); j++)
+                //    {
+                //        if (filledBoxes[i, j])
+                //        {
+                //            ++countEpsilon;
+                //        }
+                //    }
+                //}
+
+                ++_value;
+                OnChangedProgress();
+                foreach (var i in countList.Values)
                 {
-                    for (int j = 1; j < filledBoxes.GetLength(1); j++)
-                    {
-                        if (filledBoxes[i, j])
-                        {
-                            ++countEpsilon;
-                        }
-                    }
+                    //sum += (ulong)(((BigInteger)(i + 1)).Factorial() / (2 * (((BigInteger)(i - 1)).Factorial())));
+                    sum += (ulong)(i*(i-1));
                 }
-
-                baList.Add(Math.Log(1d / epsilon), Math.Log(countEpsilon));
+                
+                baList.Add(Math.Log(epsilon), Math.Log(1 / Math.Pow(count, 2) * sum));
 
                 //_value = _value + _step >= _finishSize-_startSize ? _value = _finishSize - _startSize : _value + _step;
 
@@ -238,6 +333,69 @@ namespace Fractals.Dimension
             }
 
             return baList;
+        }
+
+        private Dictionary<double, double> CountingDimension4(Bitmap img)
+        {
+            Dictionary<double, double> baList = new Dictionary<double, double>();
+            Bitmap bmp = BitmapBinary.ToBlackWhite(img);
+            int height = img.Height;
+            int width = img.Width;
+            bool[,] colorImg = new bool[width, height];
+            List<Point> points;
+            bool[,] filledBoxes;
+            bool flagFor = false;
+            points = new List<Point>();
+            //Получаем датасет цветов изображения для ускорения работы
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    if (img.GetPixel(x, y).ToArgb() != Color.White.ToArgb())
+                    {
+                        colorImg[x, y] = true;
+                        points.Add(new Point(x, y));
+                    }
+                }
+            }
+
+
+            int sum = 0; double ttt = 0; int count = points.Count;
+            int countInRadius = 0; int iStart = 0, jStart = 0, iEnd = 0, jEnd = 0;
+            List<Point> tmpPoints;
+
+            Dictionary<Point, int> countIteration = new Dictionary<Point, int>();
+            foreach (var point in points)
+                countIteration.Add(point, 0);
+            int jS = 0, jE = 0, iS = 0, iE = 0;
+
+            double eDSqr = 0;
+            //Имитация предела с изменение размера ячейки epsilon
+            for (int epsilon = 5; epsilon <= 100; epsilon += _step)
+            {
+                sum = 0;
+
+                foreach (var point in points.AsParallel())
+                {
+                    sum += points.AsParallel().Count(p=>inSet(p,point,epsilon));
+                }
+               
+                ++_value;
+                OnChangedProgress();
+                baList.Add(Math.Log(epsilon), Math.Log(1 / Math.Pow(count, 2) * sum));
+                flagFor = true;
+            }
+
+            return baList;
+        }
+        private bool inSet(int i, int j,Point point, int radius)
+        {
+            return Math.Pow(i - point.X, 2) + Math.Pow(j - point.Y, 2) <= Math.Pow(radius, 2);
+        }
+
+        private bool inSet(Point point1, Point point2, int radius)
+        {
+            return Math.Pow(point1.X - point2.X, 2) + Math.Pow(point1.Y - point2.Y, 2) <= Math.Pow(radius, 2);
         }
 
         //private double NormalEquations2d(double[] x, double[] y)

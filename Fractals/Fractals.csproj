@@ -69,7 +69,9 @@
     <Compile Include="IFractalsSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScaleXY.cs" />
+    <Compile Include="Tools\BigIntegerHelper.cs" />
     <Compile Include="Tools\BitmapBinary.cs" />
+    <Compile Include="Tools\Matrix.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ComplexParser\ComplexParser.csproj">
