@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-
+using System.Collections.Generic;
 
 namespace FractalStudio
 {
@@ -9,11 +9,11 @@ namespace FractalStudio
         CreateLsystemEventArgs _LsysArg;
         EventHandler<CreateLsystemEventArgs> _Create;
         IGroupCreate _groupCrt;
-
+        Dictionary<char, string> _rules;
         public LsystemWindow(EventHandler<CreateLsystemEventArgs> create)
         {
             InitializeComponent();
-           
+            _rules = new Dictionary<char, string>();
             _Create = create;
         }
 
@@ -35,7 +35,8 @@ namespace FractalStudio
             _LsysArg.Angle = Convert.ToInt32(numericUpDownAngle.Value);
             _LsysArg.InitAngle = Convert.ToInt32(numericUpDownInitAngle.Value);
             _LsysArg.Axioma = txtAxiom.Text;
-            
+            _LsysArg.Rules = _rules;
+            _LsysArg.Iteration = Convert.ToInt32(numericUpDownIteration.Value);
             _Create(this, _LsysArg);
             this.Close();
         }
@@ -45,6 +46,22 @@ namespace FractalStudio
         {
             _groupCrt = owner;
             return this.ShowDialog();
+        }
+
+        private void comboBoxRules_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (!comboBoxRules.Items.Contains(comboBoxRules.Text))
+                {
+                    char key = comboBoxRules.Text.Substring(0, comboBoxRules.Text.IndexOf("->")).ToCharArray()[0];
+                    string value = comboBoxRules.Text.Substring(comboBoxRules.Text.IndexOf("->") + 2, comboBoxRules.Text.Length-3);
+                    if (_rules.ContainsKey(key))
+                        _rules[key] = value;
+                    else
+                        _rules.Add(key, value);
+                }
+            }
         }
     }
 }

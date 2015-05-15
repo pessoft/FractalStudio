@@ -28,8 +28,25 @@ namespace FractalStudio.Presentation
             _view.CreateJulia += ViewCreateJulia;
             _view.CreateMandelbrot += ViewCreateMandelbrot;
             _view.CreateCorrelationDimesion += ViewCreateCorrelationDimesion;
+            _view.CreateLsystem += ViewCreateLsystem;
             _view.Start += ViewStart;
             _view.Stop += ViewStop;
+        }
+
+        private void ViewCreateLsystem(object sender, CreateLsystemEventArgs e)
+        {
+            var initData = new LsysInitData()
+            {
+                Axiom = e.Axioma,
+                Rules = e.Rules,
+                InitAngle = e.InitAngle,
+                Angle = e.Angle,
+                Iteration = e.Iteration
+            };
+
+            _fractal = _fractalSource.GetFractal(initData);
+
+            AddEventsFractal();
         }
 
         private void ViewCreateCorrelationDimesion(object sender, CreateCorrelationEventArgs e)

@@ -42,7 +42,8 @@ namespace Fractals
 
         public IFractal GetFractal(LsysInitData fractalInit)
         {
-            throw new NotImplementedException();
+            var lSys = new Lsystem(fractalInit.Axiom, fractalInit.Rules, fractalInit.InitAngle, fractalInit.Angle, fractalInit.Iteration);
+            return lSys;
         }
     }
 }

@@ -16,5 +16,8 @@ namespace FractalStudio
 
         public Dictionary<char, string> Rules
         { get; set; }
+
+        public int Iteration
+        { get; set; }
     }
 }
