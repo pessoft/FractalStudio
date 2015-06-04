@@ -143,8 +143,8 @@ namespace FractalStudio
 
 
         private Dictionary<string, string> _dimensionResultFile;
-        private Dictionary<string, double> _dimensionResult;
-        public void ResultDimension(Dictionary<string,string> file, Dictionary<string,double> minkDimension)
+        private Dictionary<string, string> _dimensionResult;
+        public void ResultDimension(Dictionary<string,string> file, Dictionary<string,string> minkDimension)
         {
             Action method = new Action(
                     ()=>

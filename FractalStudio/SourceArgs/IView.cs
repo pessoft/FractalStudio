@@ -18,7 +18,7 @@ namespace FractalStudio
 
         #region Methods
 
-        void ResultDimension(Dictionary<string, string> file, Dictionary<string, double> minkDimension);
+        void ResultDimension(Dictionary<string, string> file, Dictionary<string, string> minkDimension);
         void ChangedProgress(int min, int max, int value);
         void ChangedImage(string fileName);
         void ChangedImage(Bitmap image);

@@ -17,7 +17,7 @@ namespace Fractals
         public bool Fill
         { get; set; }
 
-        public int Iteration{ get; set; } = 20;
-        public int NoName { get; set; } = 4;
+        public int Iteration{ get; set; }
+        public int NoName { get; set; }
     }
 }

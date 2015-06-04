@@ -135,8 +135,8 @@ namespace Fractals.Tools
             {
                 PointF oldCoor, newCoor = new PointF();
                 oldCoor = _pointsOld[i];
-                newCoor.X = (float)Math.Round(oldCoor.X*_transformMatrix[0,0]+oldCoor.Y*_transformMatrix[0,1]+_transformMatrix[0,2]);
-                newCoor.Y = (float)Math.Round(oldCoor.X * _transformMatrix[1, 0] + oldCoor.Y * _transformMatrix[1, 1] + _transformMatrix[1, 2]);
+                newCoor.X = (float)(oldCoor.X*_transformMatrix[0,0]+oldCoor.Y*_transformMatrix[0,1]+_transformMatrix[0,2]);
+                newCoor.Y = (float)(oldCoor.X * _transformMatrix[1, 0] + oldCoor.Y * _transformMatrix[1, 1] + _transformMatrix[1, 2]);
                 pointsNew[i] = newCoor;
             }
 

@@ -46,9 +46,10 @@ namespace Fractals.Dimension
             OnStarting();
             List<CompletedDimensionData> result = new List<CompletedDimensionData>();
 
-            _value = 0;
+            
             foreach (var imgPath in _fileNames)
             {
+                _value = 0;
                 _bwContour = new Bitmap(imgPath)/*BitmapBinary.ToBlackWhite(new Bitmap(imgPath))*/;
                 _finishSize = Math.Min(_bwContour.Height, _bwContour.Width);
                 _finishSize = _finishSize / 10;
@@ -57,11 +58,11 @@ namespace Fractals.Dimension
 
                 
 
-                double correlation;
+                string correlation;
                 int lastSymb;
                 string name;
 
-                Dictionary<double, double> baList = CountingDimension3(_bwContour);
+                Dictionary<double, double> baList = CountingDimension2(_bwContour);
                 double[] y = new double[baList.Count];
                 double[] x = new double[baList.Count];
 
@@ -77,7 +78,7 @@ namespace Fractals.Dimension
                 lastSymb = imgPath.LastIndexOf(@"\") + 1;
                 name = imgPath.Substring(lastSymb, imgPath.Length - lastSymb);
 
-                CompletedDimensionData CompletedResult = new CompletedDimensionData() { Dim = Math.Round(correlation, 2), PathFile = imgPath, ShortName = name };
+                CompletedDimensionData CompletedResult = new CompletedDimensionData() { Dim = correlation, PathFile = imgPath, ShortName = name };
 
                 result.Add(CompletedResult);
 
@@ -447,9 +448,9 @@ namespace Fractals.Dimension
         /// <param name="x">Набор эксперентальных данных</param>
         /// <param name="y">Набор эксперентальных данных</param>
         /// <returns></returns>
-        private double OrdinaryLeastSquares(double[] x, double[] y)
+        private string OrdinaryLeastSquares(double[] x, double[] y)
         {
-            double k = 0;
+            double k = 0, sk = 0, b = 0;
             double sumXY = 0, sumX = 0, sumY = 0, sumSqrX = 0, sqrSumX = 0;
             int n = x.Length;
             sumX = x.Sum();
@@ -463,8 +464,19 @@ namespace Fractals.Dimension
 
 
             k = (n * sumXY - sumX * sumY) / (n * sumSqrX - sqrSumX);
-
-            return k;
+            b = (sumY - k * sumX) / n;
+            Console.WriteLine("n={0}", n);
+            double ndiv123 = 1f / (n - 1), f = 0;
+            Console.WriteLine("ndiv={0}", ndiv123);
+            for (int i = 0; i < x.Length; ++i)
+            {
+                f += Math.Pow(y[i] - k * x[i], 2);
+            }
+            Console.WriteLine("f={0}", f);
+            sk = Math.Sqrt(ndiv123 * (f / sqrSumX));
+            Console.WriteLine("sk={0}", sk);
+            //0177
+            return string.Format("{0} {1} {2}", Math.Round(k, 2), (char)0177, Math.Round(sk,2));
         }
 
         #endregion

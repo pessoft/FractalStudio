@@ -52,6 +52,7 @@ namespace FractalStudio
         {
             if (e.KeyCode == Keys.Enter)
             {
+                
                 if (!comboBoxRules.Items.Contains(comboBoxRules.Text))
                 {
                     char key = comboBoxRules.Text.Substring(0, comboBoxRules.Text.IndexOf("->")).ToCharArray()[0];
@@ -61,6 +62,7 @@ namespace FractalStudio
                     else
                         _rules.Add(key, value);
                 }
+                comboBoxRules.Text = "";
             }
         }
     }

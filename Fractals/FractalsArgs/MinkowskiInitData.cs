@@ -8,7 +8,7 @@ namespace Fractals
 {
     public class MinkowskiInitData
     {
-        public int Step { get; set; } = 1;
+        public int Step { get; set; }
         public int FinishSize
         { get; set; }
         public int StartSize

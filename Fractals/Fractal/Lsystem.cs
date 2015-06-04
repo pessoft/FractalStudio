@@ -60,10 +60,10 @@ namespace Fractals.Fractal
             _changedProgressEventArgs.Minimum = 0;
             _changedProgressEventArgs.Value = 0;
             _changedProgressEventArgs.Maximum = _iteration;
-            height = 640;
-            width = 640;
-            maxX = 640;
-            maxY = 640;
+            height = 280;
+            width = 320;
+            maxX = height;
+            maxY = width;
             max = new Max();
             min =new Min();
         }
@@ -85,8 +85,8 @@ namespace Fractals.Fractal
             for (int i = 0; i < _iteration; ++i)
             {
                 
-                tmpString = new StringBuilder();
-                for (int j = 0; j < _resultSting.Length; ++j)
+                tmpString = new StringBuilder("");
+                for (int j = 0, length = _resultSting.Length; j < length; ++j)
                 {
                     switch (_resultSting[j])
                     {
@@ -94,7 +94,10 @@ namespace Fractals.Fractal
                         case '-':
                         case '[':
                         case ']': tmpString.Append(_resultSting[j]); break;
-                        default: tmpString.Append(_rules[_resultSting[j]]);break;
+                        default:
+                            if (_rules.ContainsKey(_resultSting[j]))
+                                tmpString.Append(_rules[_resultSting[j]].Trim());
+                            break;
                     }
                     
                 }
@@ -106,130 +109,139 @@ namespace Fractals.Fractal
             _changedProgressEventArgs.Maximum = _resultSting.Length+1;
             var coordSource = new Source();
             var coordTmp = new Source();
-            var step = 50;
-            coordSource.x1 = 0;
-            coordSource.y1 = 0;
-            coordSource.x2 = 0;
-            coordSource.y2 =0;
+            var step = width;
+            int oldValue=0;
+            coordSource.x1 = 320;
+            coordSource.y1 = 320;
+            coordSource.x2 = 320;
+            coordSource.y2 = 320;
             coordSource.angle = _initAngle;
             _angleRotation = _initAngle;
-            foreach (var chr in _resultSting.ToString())
-            {
-                switch (chr)
+            //foreach (var chr in _resultSting.ToString())
+                for (int i = 0; i < _resultSting.Length; ++i)
                 {
-                    case '+': _angleRotation += _angle; break;
-                    case '-': _angleRotation -= _angle; break;
-                    case '[':
-                        {
-                            Source sourceTmp = coordSource;
-                            sourceTmp.angle = _angleRotation;
-                            stack.Push(sourceTmp);
-                            break;
-                        }
-                    case ']':
-                        {
-                            coordSource = stack.Pop();
-                            _angleRotation = coordSource.angle;
-                            break;
-                        }
-                    case 'F':
-                        {
-                            coordTmp = coordSource;
-                            coordSource.x1 = coordTmp.x2;
-                            coordSource.y1 = coordTmp.y2;
-                            coordSource.x2 = coordSource.x1 + step * Math.Sin(Radians(_angleRotation));
-                            coordSource.y2 = coordSource.y1 - step * Math.Cos(Radians(_angleRotation));
-
-                            if (coordSource.x1 > maxX)
+                    switch (_resultSting[i])
+                    {
+                        case '+': _angleRotation += _angle; break;
+                        case '-': _angleRotation -= _angle; break;
+                        case '[':
                             {
-                                maxX = coordSource.x1;
-                                max.x = coordSource.x1;
-                                max.y = coordSource.y1;
-                            } 
-                            if (coordSource.x2 > maxX)
-                            {
-
-                                maxX = coordSource.x2;
-                                max.x = coordSource.x2;
-                                max.y = coordSource.y2;
+                                Source sourceTmp = coordSource;
+                                sourceTmp.angle = _angleRotation;
+                                stack.Push(sourceTmp);
+                                break;
                             }
-                            if (coordSource.y1 > maxY)
+                        case ']':
                             {
-                                maxY = coordSource.y1;
-                                max.x = coordSource.x1;
-                                max.y = coordSource.y1;
+                                coordSource = stack.Pop();
+                                _angleRotation = coordSource.angle;
+                                break;
                             }
-                            if (coordSource.y2 > maxY)
+                        case 'F':
                             {
-                                maxY = coordSource.y2;
-                                max.x = coordSource.x2;
-                                max.y = coordSource.y2;
-                            }
+                                coordTmp = coordSource;
+                                coordSource.x1 = coordTmp.x2;
+                                coordSource.y1 = coordTmp.y2;
+                                coordSource.x2 = coordSource.x1 + step * Math.Sin(Radians(_angleRotation));
+                                coordSource.y2 = coordSource.y1 - step * Math.Cos(Radians(_angleRotation));
 
-                            if (coordSource.x1 < minX)
+                                if (coordSource.x1 > maxX)
+                                {
+                                    maxX = coordSource.x1;
+                                    max.x = coordSource.x1;
+                                    max.y = coordSource.y1;
+                                }
+                                if (coordSource.x2 > maxX)
+                                {
+
+                                    maxX = coordSource.x2;
+                                    max.x = coordSource.x2;
+                                    max.y = coordSource.y2;
+                                }
+                                if (coordSource.y1 > maxY)
+                                {
+                                    maxY = coordSource.y1;
+                                    max.x = coordSource.x1;
+                                    max.y = coordSource.y1;
+                                }
+                                if (coordSource.y2 > maxY)
+                                {
+                                    maxY = coordSource.y2;
+                                    max.x = coordSource.x2;
+                                    max.y = coordSource.y2;
+                                }
+
+                                if (coordSource.x1 < minX)
+                                {
+                                    minX = coordSource.x1;
+                                    min.x = coordSource.x1;
+                                    min.y = coordSource.y1;
+                                }
+                                if (coordSource.x2 < minX)
+                                {
+                                    minX = coordSource.x2;
+                                    min.x = coordSource.x2;
+                                    min.y = coordSource.y2;
+                                }
+
+                                if (coordSource.y1 < minY)
+                                {
+                                    minY = coordSource.y1;
+                                    min.x = coordSource.x1;
+                                    min.y = coordSource.y1;
+                                }
+                                if (coordSource.y2 < minY)
+                                {
+                                    minY = coordSource.y2;
+                                    min.x = coordSource.x2;
+                                    min.y = coordSource.y2;
+                                }
+
+                                coord.Enqueue(coordSource);
+                                break;
+                            }
+                        case 'f':
                             {
-                                minX = coordSource.x1;
-                                min.x = coordSource.x1;
-                                min.y = coordSource.y1;
+                                coordSource.x1 = coordSource.x2;
+                                coordSource.y1 = coordSource.y2;
+                                coordSource.x2 = coordSource.x1 + step * Math.Sin(_initAngle);
+                                coordSource.y2 = coordSource.y1 + step * Math.Cos(_initAngle);
+
+                                //if (coordSource.x1 > maxX)
+                                //    maxX = coordSource.x1;
+                                //if (coordSource.x2 > maxX)
+                                //    maxX = coordSource.x2;
+                                //if (coordSource.y1 > maxY)
+                                //    maxY = coordSource.y1;
+                                //if (coordSource.y2 > maxY)
+                                //    maxY = coordSource.y2;
+
+                                //if (coordSource.x1 < minX)
+                                //    minX = coordSource.x1;
+                                //if (coordSource.x2 < minX)
+                                //    minX = coordSource.x2;
+                                //if (coordSource.y1 < minY)
+                                //    minY = coordSource.y1;
+                                //if (coordSource.y2 < minY)
+                                //    minY = coordSource.y2;
+
+                                break;
                             }
-                            if (coordSource.x2 < minX)
-                            {
-                                minX = coordSource.x2;
-                                min.x = coordSource.x2;
-                                min.y = coordSource.y2;
-                            }
-
-                            if (coordSource.y1 < minY)
-                            {
-                                minY = coordSource.y1;
-                                min.x = coordSource.x1;
-                                min.y = coordSource.y1;
-                            }
-                            if (coordSource.y2 < minY)
-                            {
-                                minY = coordSource.y2;
-                                min.x = coordSource.x2;
-                                min.y = coordSource.y2;
-                            }
-
-                            coord.Enqueue(coordSource);
-                            break;
-                        }
-                    case 'f':
-                        {
-                            coordSource.x1 = coordSource.x2;
-                            coordSource.y1 = coordSource.y2;
-                            coordSource.x2 = coordSource.x1 + step * Math.Sin(_initAngle);
-                            coordSource.y2 = coordSource.y1 + step * Math.Cos(_initAngle);
-
-                            //if (coordSource.x1 > maxX)
-                            //    maxX = coordSource.x1;
-                            //if (coordSource.x2 > maxX)
-                            //    maxX = coordSource.x2;
-                            //if (coordSource.y1 > maxY)
-                            //    maxY = coordSource.y1;
-                            //if (coordSource.y2 > maxY)
-                            //    maxY = coordSource.y2;
-
-                            //if (coordSource.x1 < minX)
-                            //    minX = coordSource.x1;
-                            //if (coordSource.x2 < minX)
-                            //    minX = coordSource.x2;
-                            //if (coordSource.y1 < minY)
-                            //    minY = coordSource.y1;
-                            //if (coordSource.y2 < minY)
-                            //    minY = coordSource.y2;
-
-                            break;
-                        }
+                    }
+                    ++_changedProgressEventArgs.Value;
+                    if (_changedProgressEventArgs.Value - oldValue == 25)
+                    {
+                        oldValue = _changedProgressEventArgs.Value;
+                        OnChangedProgress();
+                    }
+                   // OnChangedProgress();
                 }
-                ++_changedProgressEventArgs.Value;
-                OnChangedProgress();
-            }
 
-            cntX = coord.Sum(p => p.x1 + p.x2)/(coord.Count*2);
-            cntY = coord.Sum(p => p.y1 + p.y2) / (coord.Count * 2);
-            ConvertPoints();
+                cntX = coord.Sum(p => p.x1 + p.x2) / (coord.Count * 2);
+                cntY = coord.Sum(p => p.y1 + p.y2) / (coord.Count * 2);
+                ConvertPoints();
+                
+              //  Console.Write("end");
         }
         private void ImageGenerate()
         {
@@ -237,6 +249,7 @@ namespace Fractals.Fractal
             Pen pen = new Pen(Brushes.Black);
             using (var g = Graphics.FromImage(bmpResult))
             {
+                g.Clear(Color.White);
                 for (int i = 0; i < coordPoints.Length; i += 2)
                     g.DrawLine(pen,coordPoints[i], coordPoints[i+1]);
             }
@@ -260,39 +273,50 @@ namespace Fractals.Fractal
                 points.Add(tmp);
             }
             affinTrn = new Matrix(points.ToArray());
-            bool d = false;
-            if ((maxX > width || maxY > height || minX<0 || minY<0)&&d)
+            //bool d = false;
+            if ((maxX > width || maxY > height || minX<0 || minY<0))
             {
-                double maxLength=0,scale=0;
-                if (maxX > width || maxY>height)
-                {
-                    if (Math.Sqrt(Math.Pow(max.y - 320, 2)) > Math.Sqrt(Math.Pow(max.x - 320, 2)))
-                    {
-                        maxLength = Math.Sqrt(Math.Pow(max.y - 320, 2));
-                    }
-                    else
-                    {
-                        maxLength = Math.Sqrt(Math.Pow(max.x - 320, 2));
-                    } 
-                }
-                else
-                    if (minX < 0 || minY<0)
-                    {
-                        if (Math.Sqrt(Math.Pow(min.y - 320, 2)) > Math.Sqrt(Math.Pow(min.x - 320, 2)))
-                        {
-                            maxLength = Math.Sqrt(Math.Pow(min.y - 320, 2));
-                        }
-                        else
-                        {
-                            maxLength = Math.Sqrt(Math.Pow(min.x - 320, 2));
-                        }
-                    }
+                double maxLength1=0,maxLength2=0,maxLength=0,scale=0;
+                //if (maxX > width || maxY>height)
+                //{
+                //    if (Math.Sqrt(Math.Pow(max.y - width / 2, 2)) > Math.Sqrt(Math.Pow(max.x - width / 2, 2)))
+                //    {
+                //        maxLength = Math.Sqrt(Math.Pow(max.y - width / 2, 2));
+                //    }
+                //    else
+                //    {
+                //        maxLength = Math.Sqrt(Math.Pow(max.x - width / 2, 2));
+                //    } 
+                //}
+                //else
+                //    if (minX < 0 || minY<0)
+                //    {
+                //        if (Math.Sqrt(Math.Pow(min.y - width / 2, 2)) > Math.Sqrt(Math.Pow(min.x - width / 2, 2)))
+                //        {
+                //            maxLength = Math.Sqrt(Math.Pow(min.y - width / 2, 2));
+                //        }
+                //        else
+                //        {
+                //            maxLength = Math.Sqrt(Math.Pow(min.x - width / 2, 2));
+                //        }
+                //    }
 
-                //scale = 1 / (maxLength - 320);
-                scale = 1;
+                #region
+               
+
+                    maxLength1 = Math.Sqrt(Math.Pow(max.y - height / 2, 2) + Math.Pow(max.x - width / 2, 2));
+                    maxLength2 = Math.Sqrt(Math.Pow(min.x - width / 2, 2) + Math.Pow(min.y - height / 2, 2));
+
+                        if (maxLength1 > maxLength2)
+                            maxLength = maxLength1;
+                        else
+                            maxLength = maxLength2;
+                #endregion
+                scale = width/(1.5*maxLength);
+                //scale = 0.005;
                 affinTrn.Scale(scale, scale, cntX, cntY);
             }
-
+            
             dx = -(cntX - width / 2);
             dy = -(cntY - height / 2);
             affinTrn.Transform(dx, dy);

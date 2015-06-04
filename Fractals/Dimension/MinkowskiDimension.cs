@@ -62,7 +62,7 @@ namespace Fractals.Dimension
                 ++_value;
                 OnChangedProgress();
 
-                double mink;
+                string mink;
                 int lastSymb;
                 string name;
 
@@ -83,7 +83,7 @@ namespace Fractals.Dimension
                 lastSymb = imgPath.LastIndexOf(@"\") + 1;
                 name = imgPath.Substring(lastSymb, imgPath.Length - lastSymb);
 
-                CompletedDimensionData CompletedResult = new CompletedDimensionData() { Dim = Math.Round(mink, 2), PathFile = imgPath, ShortName = name };
+                CompletedDimensionData CompletedResult = new CompletedDimensionData() { Dim = mink, PathFile = imgPath, ShortName = name };
 
                 result.Add(CompletedResult);
 
@@ -282,9 +282,9 @@ namespace Fractals.Dimension
         /// <param name="x">Набор эксперентальных данных</param>
         /// <param name="y">Набор эксперентальных данных</param>
         /// <returns></returns>
-        private double OrdinaryLeastSquares(double[] x, double[] y)
+        private string OrdinaryLeastSquares(double[] x, double[] y)
         {
-            double k=0;
+            double k=0, sk=0, b=0;
             double sumXY = 0, sumX = 0, sumY = 0, sumSqrX = 0, sqrSumX = 0;
             int n = x.Length ;
             sumX = x.Sum();
@@ -298,10 +298,40 @@ namespace Fractals.Dimension
 
 
             k = (n * sumXY - sumX * sumY) / (n * sumSqrX - sqrSumX);
+            b = (sumY - k * sumX) / n;
+            Console.WriteLine("n={0}", n);
+            double ndiv123 = 1f/(n-1),f=0;
+            Console.WriteLine("ndiv={0}", ndiv123);
+            for (int i = 0; i < x.Length; ++i)
+            {
+                f+=Math.Pow(y[i]-k*x[i],2);
+            }
+            Console.WriteLine("f={0}", f);
+            sk = Math.Sqrt(ndiv123 * (f / sqrSumX));
+            Console.WriteLine("sk={0}", sk);
+            //0177
+            return string.Format("{0} {1} {2}", Math.Round(k, 2), (char)0177, Math.Round(sk, 2));
+        }
+
+        private double OrdinaryLeastSquares2(double[] x, double[] y)
+        {
+            double k = 0;
+            double sumXY = 0, sumX = 0, sumY = 0, sumSqrX = 0, sqrSumX = 0;
+            int n = x.Length;
+            sumX = x.Sum();
+            sumY = y.Sum();
+            sqrSumX = sumX * sumX;
+            for (int i = 0; i < x.Length; ++i)
+            {
+                sumXY += x[i] * y[i];
+                sumSqrX += x[i] * x[i];
+            }
+
+
+            k = sumXY / sumSqrX;
 
             return k;
         }
-
         #endregion
 
 

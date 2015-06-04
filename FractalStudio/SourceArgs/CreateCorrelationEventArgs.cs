@@ -8,7 +8,7 @@ namespace FractalStudio
 {
     public class CreateCorrelationEventArgs : EventArgs
     {
-        public int Step { get; set; } = 1;
+        public int Step { get; set; }
         public int FinishSize
         { get; set; }
         public int StartSize

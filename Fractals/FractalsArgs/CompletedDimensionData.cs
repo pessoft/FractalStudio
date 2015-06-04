@@ -8,7 +8,7 @@
         public string ShortName
         { get; set; }
 
-        public double Dim
+        public string Dim
         { get; set; }
     }
 }

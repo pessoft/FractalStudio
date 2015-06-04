@@ -151,7 +151,7 @@ namespace FractalStudio.Presentation
 
             Dictionary<string, string> fileName = e.Result.ToDictionary(result => result.ShortName, result => result.PathFile);
             
-            Dictionary<string, double> minkDimension = e.Result.ToDictionary(result => result.ShortName, result => result.Dim);
+            Dictionary<string, string> minkDimension = e.Result.ToDictionary(result => result.ShortName, result => result.Dim.ToString());
             
             _view.ResultDimension(fileName, minkDimension);
 
