@@ -9,23 +9,23 @@ namespace Fractals.Dimension
     /// <summary>
     /// Размернеость Минковского
     /// </summary>
-    public class MinkowskiDimension : IDimension
+    public class MinkowskiDimension : Dimension
     {
-        #region Поля и события класса
+        //#region Поля и события класса
 
-        List<CompletedDimensionData> _result;
-        List<string> _fileNames;
-        int _startSize, _finishSize, _step;
-        int _min, _max, _value;
-        string file;
-        Bitmap _bwContour;
+        //List<CompletedDimensionData> _result;
+        //List<string> _fileNames;
+        //int _startSize, _finishSize, _step;
+        //int _min, _max, _value;
+        //string file;
+        //Bitmap _bwContour;
 
-        public event EventHandler<ChangedImageEventAgrs> ChangedImage;
-        public event EventHandler<CompletedDimensionArgs> Completed;
-        public event EventHandler Starting;
-        public event EventHandler<ChangedProgressEventArgs> ChangedProgress;
+        //public event EventHandler<ChangedImageEventAgrs> ChangedImage;
+        //public event EventHandler<CompletedDimensionArgs> Completed;
+        //public event EventHandler Starting;
+        //public event EventHandler<ChangedProgressEventArgs> ChangedProgress;
 
-        #endregion
+        //#endregion
 
         /// <summary>
         /// Создает экземпляр класс размерности Минковского
@@ -44,7 +44,7 @@ namespace Fractals.Dimension
             _max = fileNames.Count;
         }
        
-        public void Start()
+        protected override void Run()
         {
 
             OnStarting();
@@ -66,7 +66,7 @@ namespace Fractals.Dimension
                 int lastSymb;
                 string name;
 
-                Dictionary<double, double> baList = CountingDimension(_bwContour);
+                Dictionary<double, double> baList = ReceiveData(_bwContour);
                 double[] y = new double[baList.Count];
                 double[] x = new double[baList.Count];
 
@@ -94,8 +94,8 @@ namespace Fractals.Dimension
             _bwContour = null;
         }
 
-        #region Нахождение размерности Минковского методом наименьших квадратов
-        private Dictionary<double, double> CountingDimension(Bitmap img)
+        #region Получение эксперементальных данных для МНК
+        private Dictionary<double, double> ReceiveData(Bitmap img)
         {
             Dictionary<double, double> baList = new Dictionary<double, double>();
             Bitmap bmp = BitmapBinary.ToBlackWhite(img);
@@ -159,206 +159,81 @@ namespace Fractals.Dimension
             return baList;
         }
 
-        private Dictionary<double, double> CountingDimension2(Bitmap img)
-        {
-            #region
-
-            Dictionary<double, double> baList = new Dictionary<double, double>();
-            Bitmap bmp = BitmapBinary.ToBlackWhite(img);
-            int height = bmp.Height;
-            int width = bmp.Width;
-            bool[,] colorImg = new bool[width, height];
-            bool[,] filledBoxes;
-
-            
-            //Получаем датасет цветов изображения для ускорения работы
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    if (bmp.GetPixel(x, y).ToArgb() == Color.Black.ToArgb())
-                        colorImg[x, y] = true;
-                }
-            }
-            #endregion
-            //Имитация предела с изменение размера ячейки epsilon
-            
-            for (int epsilon = _startSize; epsilon <= _finishSize; epsilon+=_step)
-            {
-                int hCount = height/ epsilon,
-                    wCount = width / epsilon;
-
-                int countEpsilon = 0;
-
-                filledBoxes = new bool[wCount, hCount];
-
-                for (int i = 1; i < wCount; ++i)
-                    for (int j = 1; j < hCount; ++j)
-                    {
-                        for (int x = (i - 1) * epsilon+1 ; x <= i * epsilon; ++x)
-                        {
-                            for (int y = (j - 1)* epsilon+1 ; y <= j * epsilon; ++y)
-                            {
-                                if (colorImg[x, y])
-                                {
-                                    filledBoxes[i, j] = true;
-                                    break;
-                                }
-                            }
-                            if (filledBoxes[i, j])
-                                break;
-                        }
-
-                    }
-
-
-                for (int i = 1; i < filledBoxes.GetLength(0); i++)
-                {
-                    for (int j = 1; j < filledBoxes.GetLength(1); j++)
-                    {
-                        if (filledBoxes[i, j])
-                        {
-                            ++countEpsilon;
-                        }
-                    }
-                }
-
-                baList.Add(Math.Log(1d / epsilon), Math.Log(countEpsilon));
-
-                //_value = _value + _step >= _finishSize-_startSize ? _value = _finishSize - _startSize : _value + _step;
-
-                //OnChangedProgress();
-            }
-
-            return baList;
-        }
-
-        //private double OrdinaryLeastSquares(double[] x, double[] y)
+        //private Dictionary<double, double> ReceiveData(Bitmap img)
         //{
-        //    //x^t * x
-        //    double[,] xtx = new double[2, 2];
-        //    for (int i = 0; i < x.Length; i++)
-        //    {
-        //        xtx[0, 1] += x[i];
-        //        xtx[0, 0] += x[i] * x[i];
-        //    }
-        //    xtx[1, 0] = xtx[0, 1];
-        //    xtx[1, 1] = x.Length;
+        //    #region
 
-        //    //inverse
-        //    double[,] xtxInv = new double[2, 2];
-        //    double d = 1 / (xtx[0, 0] * xtx[1, 1] - xtx[1, 0] * xtx[0, 1]);
-        //    xtxInv[0, 0] = xtx[1, 1] * d;
-        //    xtxInv[0, 1] = -xtx[0, 1] * d;
-        //    xtxInv[1, 0] = -xtx[1, 0] * d;
-        //    xtxInv[1, 1] = xtx[0, 0] * d;
+        //    Dictionary<double, double> baList = new Dictionary<double, double>();
+        //    Bitmap bmp = BitmapBinary.ToBlackWhite(img);
+        //    int height = bmp.Height;
+        //    int width = bmp.Width;
+        //    bool[,] colorImg = new bool[width, height];
+        //    bool[,] filledBoxes;
 
-        //    //times x^t
-        //    double[,] xtxInvxt = new double[2, x.Length];
-        //    for (int i = 0; i < 2; i++)
+            
+        //    //Получаем датасет цветов изображения для ускорения работы
+        //    for (int x = 0; x < width; x++)
         //    {
-        //        for (int j = 0; j < x.Length; j++)
+        //        for (int y = 0; y < height; y++)
         //        {
-        //            xtxInvxt[i, j] = xtxInv[i, 0] * x[j] + xtxInv[i, 1];
+        //            if (bmp.GetPixel(x, y).ToArgb() == Color.Black.ToArgb())
+        //                colorImg[x, y] = true;
         //        }
         //    }
-
-        //    //times y
-        //    double[] theta = new double[2];
-        //    for (int i = 0; i < 2; i++)
+        //    #endregion
+        //    //Имитация предела с изменение размера ячейки epsilon
+            
+        //    for (int epsilon = _startSize; epsilon <= _finishSize; epsilon+=_step)
         //    {
-        //        for (int j = 0; j < x.Length; j++)
+        //        int hCount = height/ epsilon,
+        //            wCount = width / epsilon;
+
+        //        int countEpsilon = 0;
+
+        //        filledBoxes = new bool[wCount, hCount];
+
+        //        for (int i = 1; i < wCount; ++i)
+        //            for (int j = 1; j < hCount; ++j)
+        //            {
+        //                for (int x = (i - 1) * epsilon+1 ; x <= i * epsilon; ++x)
+        //                {
+        //                    for (int y = (j - 1)* epsilon+1 ; y <= j * epsilon; ++y)
+        //                    {
+        //                        if (colorImg[x, y])
+        //                        {
+        //                            filledBoxes[i, j] = true;
+        //                            break;
+        //                        }
+        //                    }
+        //                    if (filledBoxes[i, j])
+        //                        break;
+        //                }
+
+        //            }
+
+
+        //        for (int i = 1; i < filledBoxes.GetLength(0); i++)
         //        {
-        //            theta[i] += xtxInvxt[i, j] * y[j];
+        //            for (int j = 1; j < filledBoxes.GetLength(1); j++)
+        //            {
+        //                if (filledBoxes[i, j])
+        //                {
+        //                    ++countEpsilon;
+        //                }
+        //            }
         //        }
+
+        //        baList.Add(Math.Log(1d / epsilon), Math.Log(countEpsilon));
+
+        //        //_value = _value + _step >= _finishSize-_startSize ? _value = _finishSize - _startSize : _value + _step;
+
+        //        //OnChangedProgress();
         //    }
 
-        //    return Math.Round(theta[0], 3);
+        //    return baList;
         //}
-
-        /// <summary>
-        /// Вычесление МНК для линейной функции
-        /// </summary>
-        /// <param name="x">Набор эксперентальных данных</param>
-        /// <param name="y">Набор эксперентальных данных</param>
-        /// <returns></returns>
-        private string OrdinaryLeastSquares(double[] x, double[] y)
-        {
-            double k=0, sk=0, b=0;
-            double sumXY = 0, sumX = 0, sumY = 0, sumSqrX = 0, sqrSumX = 0;
-            int n = x.Length ;
-            sumX = x.Sum();
-            sumY = y.Sum();
-            sqrSumX = sumX * sumX;
-            for (int i = 0; i < x.Length; ++i)
-            {
-                sumXY += x[i] * y[i];
-                sumSqrX += x[i] * x[i];
-            }
-
-
-            k = (n * sumXY - sumX * sumY) / (n * sumSqrX - sqrSumX);
-            b = (sumY - k * sumX) / n;
-            Console.WriteLine("n={0}", n);
-            double ndiv123 = 1f/(n-1),f=0;
-            Console.WriteLine("ndiv={0}", ndiv123);
-            for (int i = 0; i < x.Length; ++i)
-            {
-                f+=Math.Pow(y[i]-k*x[i],2);
-            }
-            Console.WriteLine("f={0}", f);
-            sk = Math.Sqrt(ndiv123 * (f / sqrSumX));
-            Console.WriteLine("sk={0}", sk);
-            //0177
-            return string.Format("{0} {1} {2}", Math.Round(k, 2), (char)0177, Math.Round(sk, 2));
-        }
-
-        private double OrdinaryLeastSquares2(double[] x, double[] y)
-        {
-            double k = 0;
-            double sumXY = 0, sumX = 0, sumY = 0, sumSqrX = 0, sqrSumX = 0;
-            int n = x.Length;
-            sumX = x.Sum();
-            sumY = y.Sum();
-            sqrSumX = sumX * sumX;
-            for (int i = 0; i < x.Length; ++i)
-            {
-                sumXY += x[i] * y[i];
-                sumSqrX += x[i] * x[i];
-            }
-
-
-            k = sumXY / sumSqrX;
-
-            return k;
-        }
+  
         #endregion
-
-
-        #region Инкупсуляция вызовов событий
-
-        private void OnStarting()
-        {
-            if (Starting != null)
-                Starting(this, EventArgs.Empty);
-        }
-        private void OnCompleted()
-        {
-            if (Completed != null)
-                Completed(this, new CompletedDimensionArgs { Result = _result });
-        }
-        private void OnChangedImage(string file)
-        {
-            if (ChangedImage != null)
-                ChangedImage(this, new ChangedImageEventAgrs { Img = file });
-        }
-        private void OnChangedProgress()
-        {
-            if (ChangedProgress != null)
-                ChangedProgress(this, new ChangedProgressEventArgs { Minimum = _min, Maximum = _max, Value = _value });
-        }
-
-
-        #endregion
+                
     }
 }

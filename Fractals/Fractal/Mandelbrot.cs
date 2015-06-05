@@ -8,14 +8,13 @@ using System.Drawing;
 
 namespace Fractals.Fractal
 {
-    public class Mandelbrot :IFractal
+    public class Mandelbrot :Fractal
     {
-        Bitmap _bmp;
+        
         bool _fill;
         int _height, _width, _iteration, _noName;
         double _xMin, _xMax, _yMin, _yMax, _dX, _dY;
         Func<Complex, Complex> _calculate;
-        ChangedProgressEventArgs _changedProgressEventArgs;
         Complex z, tmpZ;
         int iter;
 
@@ -41,14 +40,10 @@ namespace Fractals.Fractal
             _dY = (_yMax - _yMin) / (_height - 1);
         }
 
-        #region event IFtactal
-        public event EventHandler<ChangedProgressEventArgs> ChangedProgress;
-        public event EventHandler<CompletedFractalEventArgs> Completed;
-        public event EventHandler Starting;
-        #endregion
+      
 
         #region methods IFractal
-        public void Start()
+        protected override void Run()
         {
             OnStarting();
             Complex ppp = new Complex();
@@ -104,25 +99,7 @@ namespace Fractals.Fractal
         }
         #endregion
 
-        #region event Methods
-        protected void OnChangedProgress()
-        {
-            if (ChangedProgress != null)
-                ChangedProgress(this, _changedProgressEventArgs);
-        }
-
-        protected void OnCompleted()
-        {
-            if (Completed != null)
-                Completed(this, new CompletedFractalEventArgs() { Img = _bmp });
-        }
-
-        protected void OnStarting()
-        {
-            if (Starting != null)
-                Starting(this, EventArgs.Empty);
-        }
-        #endregion
+       
     }
 }
 

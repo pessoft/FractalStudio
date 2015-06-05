@@ -7,7 +7,7 @@ using Fractals.Tools;
 
 namespace Fractals.Fractal
 {
-    public class Lsystem : IFractal
+    public class Lsystem : Fractal
     {
         struct Source
         {
@@ -34,8 +34,6 @@ namespace Fractals.Fractal
         Queue<Source> coord;
         Stack<Source> stack;
         PointF[] coordPoints;
-        Bitmap bmpResult;
-        ChangedProgressEventArgs _changedProgressEventArgs;
         Matrix affinTrn;
         Max max;
         Min min;
@@ -67,7 +65,8 @@ namespace Fractals.Fractal
             max = new Max();
             min =new Min();
         }
-        public void Start()
+
+        protected override void Run()
         {
             OnStarting();
 
@@ -245,9 +244,9 @@ namespace Fractals.Fractal
         }
         private void ImageGenerate()
         {
-            bmpResult = new Bitmap(width, height);
+            _bmp = new Bitmap(width, height);
             Pen pen = new Pen(Brushes.Black);
-            using (var g = Graphics.FromImage(bmpResult))
+            using (var g = Graphics.FromImage(_bmp))
             {
                 g.Clear(Color.White);
                 for (int i = 0; i < coordPoints.Length; i += 2)
@@ -335,22 +334,6 @@ namespace Fractals.Fractal
             return Math.Cos(angle * Math.PI / 180);
         }
 
-        #region Вызов событий
-        private void OnStarting()
-        {
-            if (Starting != null)
-                Starting(this, EventArgs.Empty);
-        }
-        protected void OnCompleted()
-        {
-            if (Completed != null)
-                Completed(this, new CompletedFractalEventArgs() { Img = bmpResult });
-        }
-        protected void OnChangedProgress()
-        {
-            if (ChangedProgress != null)
-                ChangedProgress(this, _changedProgressEventArgs);
-        }
-        #endregion
+       
     }
 }

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dimension\CorrelationDimension.cs" />
+    <Compile Include="Dimension\Dimension.cs" />
     <Compile Include="Dimension\IDimension.cs" />
     <Compile Include="Dimension\MinkowskiDimension.cs" />
     <Compile Include="FractalsArgs\CompletedFractalEventArgs.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="FractalsArgs\MinkowskiInitData.cs" />
     <Compile Include="FractalsArgs\ChangedProgressEventArgs.cs" />
     <Compile Include="FractalsSource.cs" />
+    <Compile Include="Fractal\Fractal.cs" />
     <Compile Include="Fractal\IFractal.cs" />
     <Compile Include="Fractal\Julia.cs" />
     <Compile Include="Fractal\Lsystem.cs" />
