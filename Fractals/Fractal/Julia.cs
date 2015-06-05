@@ -12,7 +12,7 @@ namespace Fractals.Fractal
     {
         
         bool _fill;
-        int _height, _width, _iteration,_noName;
+        int _iteration,_noName;
         double _xMin,_xMax,_yMin,_yMax,_dX,_dY;
         Func<Complex, Complex> _calculate;
         Complex z,tmpZ;
@@ -21,31 +21,28 @@ namespace Fractals.Fractal
         public Julia(ScaleXY scaleXY,int iteration,int noName,bool fill ,Func<Complex,Complex> calculate)
         {
             _fill = fill;
-            _height = 640;
-            _width = 640;
             _iteration = iteration;
             _noName = noName;
-            _changedProgressEventArgs = new ChangedProgressEventArgs() { Minimum =0, Maximum = _width, Value = 0};
-            _bmp = new Bitmap(_width, _height);
-            _bmp.SetResolution(600, 600);
-            using (var g = Graphics.FromImage(_bmp))
-                g.Clear(Color.White);
-
-                _xMin = scaleXY.xMin;
+            _xMin = scaleXY.xMin;
             _xMax = scaleXY.xMax;
             _yMin = scaleXY.yMin;
             _yMax = scaleXY.yMax;
             _calculate = calculate;
-            _dX = (_xMax - _xMin) / (_width - 1);
-            _dY = (_yMax - _yMin) / (_height - 1);
+            
         }
-
-        
 
         #region methods IFractal
         protected override void Run()
         {
             OnStarting();
+            _changedProgressEventArgs = new ChangedProgressEventArgs() { Minimum = 0, Maximum = _width, Value = 0 };
+            _bmp = new Bitmap(_width, _height);
+            _dX = (_xMax - _xMin) / (_width - 1);
+            _dY = (_yMax - _yMin) / (_height - 1);
+            //_bmp.SetResolution(600, 600);
+            using (var g = Graphics.FromImage(_bmp))
+                g.Clear(Color.White);
+
             Complex ppp = new Complex();
             double p1=0, p2=0;
             for (int width = 0; width < _width; ++width)

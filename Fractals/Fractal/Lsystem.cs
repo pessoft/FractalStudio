@@ -28,7 +28,6 @@ namespace Fractals.Fractal
         double _initAngle, _angle;
         double _angleRotation;
         int _iteration;
-        int height, width;
         double maxX, maxY,cntX,cntY,minX=0,minY=0;
         Dictionary<char, string> _rules;
         Queue<Source> coord;
@@ -54,14 +53,8 @@ namespace Fractals.Fractal
             _resultSting = new StringBuilder(_axiom);
             coord = new Queue<Source>();
             stack = new Stack<Source>();
-            _changedProgressEventArgs = new ChangedProgressEventArgs();
-            _changedProgressEventArgs.Minimum = 0;
-            _changedProgressEventArgs.Value = 0;
-            _changedProgressEventArgs.Maximum = _iteration;
-            height = 280;
-            width = 320;
-            maxX = height;
-            maxY = width;
+            _changedProgressEventArgs = new ChangedProgressEventArgs() { Minimum = 0, Maximum = _iteration, Value = 0};
+            
             max = new Max();
             min =new Min();
         }
@@ -69,11 +62,9 @@ namespace Fractals.Fractal
         protected override void Run()
         {
             OnStarting();
-
             RuleGenerate();
             CoordinateGenerate();
             ImageGenerate();
-
             OnCompleted();
         }
 
@@ -106,9 +97,11 @@ namespace Fractals.Fractal
         private void CoordinateGenerate()
         {
             _changedProgressEventArgs.Maximum = _resultSting.Length+1;
+            maxX = _height;
+            maxY = _width;
             var coordSource = new Source();
             var coordTmp = new Source();
-            var step = width;
+            var step = _width;
             int oldValue=0;
             coordSource.x1 = 320;
             coordSource.y1 = 320;
@@ -244,7 +237,7 @@ namespace Fractals.Fractal
         }
         private void ImageGenerate()
         {
-            _bmp = new Bitmap(width, height);
+            _bmp = new Bitmap(_width, _height);
             Pen pen = new Pen(Brushes.Black);
             using (var g = Graphics.FromImage(_bmp))
             {
@@ -273,51 +266,51 @@ namespace Fractals.Fractal
             }
             affinTrn = new Matrix(points.ToArray());
             //bool d = false;
-            if ((maxX > width || maxY > height || minX<0 || minY<0))
+            if ((maxX > _width || maxY > _height || minX<0 || minY<0))
             {
                 double maxLength1=0,maxLength2=0,maxLength=0,scale=0;
-                //if (maxX > width || maxY>height)
+                //if (maxX > _width || maxY>_height)
                 //{
-                //    if (Math.Sqrt(Math.Pow(max.y - width / 2, 2)) > Math.Sqrt(Math.Pow(max.x - width / 2, 2)))
+                //    if (Math.Sqrt(Math.Pow(max.y - _width / 2, 2)) > Math.Sqrt(Math.Pow(max.x - _width / 2, 2)))
                 //    {
-                //        maxLength = Math.Sqrt(Math.Pow(max.y - width / 2, 2));
+                //        maxLength = Math.Sqrt(Math.Pow(max.y - _width / 2, 2));
                 //    }
                 //    else
                 //    {
-                //        maxLength = Math.Sqrt(Math.Pow(max.x - width / 2, 2));
+                //        maxLength = Math.Sqrt(Math.Pow(max.x - _width / 2, 2));
                 //    } 
                 //}
                 //else
                 //    if (minX < 0 || minY<0)
                 //    {
-                //        if (Math.Sqrt(Math.Pow(min.y - width / 2, 2)) > Math.Sqrt(Math.Pow(min.x - width / 2, 2)))
+                //        if (Math.Sqrt(Math.Pow(min.y - _width / 2, 2)) > Math.Sqrt(Math.Pow(min.x - _width / 2, 2)))
                 //        {
-                //            maxLength = Math.Sqrt(Math.Pow(min.y - width / 2, 2));
+                //            maxLength = Math.Sqrt(Math.Pow(min.y - _width / 2, 2));
                 //        }
                 //        else
                 //        {
-                //            maxLength = Math.Sqrt(Math.Pow(min.x - width / 2, 2));
+                //            maxLength = Math.Sqrt(Math.Pow(min.x - _width / 2, 2));
                 //        }
                 //    }
 
                 #region
                
 
-                    maxLength1 = Math.Sqrt(Math.Pow(max.y - height / 2, 2) + Math.Pow(max.x - width / 2, 2));
-                    maxLength2 = Math.Sqrt(Math.Pow(min.x - width / 2, 2) + Math.Pow(min.y - height / 2, 2));
+                    maxLength1 = Math.Sqrt(Math.Pow(max.y - _height / 2, 2) + Math.Pow(max.x - _width / 2, 2));
+                    maxLength2 = Math.Sqrt(Math.Pow(min.x - _width / 2, 2) + Math.Pow(min.y - _height / 2, 2));
 
                         if (maxLength1 > maxLength2)
                             maxLength = maxLength1;
                         else
                             maxLength = maxLength2;
                 #endregion
-                scale = width/(1.5*maxLength);
+                scale = _width/(1.5*maxLength);
                 //scale = 0.005;
                 affinTrn.Scale(scale, scale, cntX, cntY);
             }
             
-            dx = -(cntX - width / 2);
-            dy = -(cntY - height / 2);
+            dx = -(cntX - _width / 2);
+            dy = -(cntY - _height / 2);
             affinTrn.Transform(dx, dy);
             coordPoints = affinTrn.GetPoints();
         }

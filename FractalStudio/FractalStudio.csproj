@@ -109,12 +109,19 @@
     <Compile Include="MinkowskiWindow.Designer.cs">
       <DependentUpon>MinkowskiWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingSizeImg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingSizeImg.Designer.cs">
+      <DependentUpon>SettingSizeImg.cs</DependentUpon>
+    </Compile>
     <Compile Include="SourceArgs\CreateCorrelationEventArgs.cs" />
     <Compile Include="SourceArgs\CreateJuliaEventArgs.cs" />
     <Compile Include="SourceArgs\CreateLsystemEventArgs.cs" />
     <Compile Include="SourceArgs\CreateMandelbrotEventArgs.cs" />
     <Compile Include="SourceArgs\CreateMinkowskiEventArgs.cs" />
     <Compile Include="SourceArgs\IGroupCreate.cs" />
+    <Compile Include="SourceArgs\ImgSizeEventArgs.cs" />
     <Compile Include="SourceArgs\IView.cs" />
     <Compile Include="SourceArgs\IWindowModal.cs" />
     <Compile Include="JuliaWindow.cs">
@@ -168,9 +175,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SettingSizeImg.resx">
+      <DependentUpon>SettingSizeImg.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="FractalStudio_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">

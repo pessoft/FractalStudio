@@ -17,7 +17,7 @@ namespace Fractals.Dimension
         protected int _min, _max, _value;
         protected string file;
         protected Bitmap _bwContour;
-        
+
         public event EventHandler<ChangedImageEventAgrs> ChangedImage;
         public event EventHandler<CompletedDimensionArgs> Completed;
         public event EventHandler Starting;

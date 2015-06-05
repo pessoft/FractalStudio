@@ -9,14 +9,27 @@ namespace Fractals.Fractal
     {
         protected Bitmap _bmp;
         protected ChangedProgressEventArgs _changedProgressEventArgs;
+        protected int _width = 640, _height = 640;
+
 
         #region event IFtactal
 
         public event EventHandler<ChangedProgressEventArgs> ChangedProgress;
         public event EventHandler<CompletedFractalEventArgs> Completed;
         public event EventHandler Starting;
-        
+
         #endregion
+
+        /// <summary>
+        /// Устанавливает размер изображения.
+        /// </summary>
+        /// <param name="width">Ширина изображения.</param>
+        /// <param name="height">Высота изображения.</param>
+        public void SetSize(int width, int height)
+        {
+            _width = width;
+            _height = height;
+        }
 
         public void Start()
         {

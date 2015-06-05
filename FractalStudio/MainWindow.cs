@@ -20,16 +20,28 @@ namespace FractalStudio
         public event EventHandler<CreateMandelbrotEventArgs> CreateMandelbrot;
         public event EventHandler<CreateMinkowskiEventArgs> CreateMinkowskiDimesion;
         public event EventHandler<CreateCorrelationEventArgs> CreateCorrelationDimesion;
+        public event EventHandler<ImgSizeEventArgs> ChangeSizeImg;
 
         public event EventHandler Start;
         public event EventHandler Stop;
-        
+
+        /// <summary>
+        /// Ширина изображения.
+        /// </summary>
+        int _width;
+        /// <summary>
+        /// Высота изображения.
+        /// </summary>
+        int _height;
 
         #endregion
 
         public MainWindow()
         {
             InitializeComponent();
+
+            _width = Properties.Settings.Default.width;
+            _height = Properties.Settings.Default.height;
         }
 
         /// <summary>
@@ -231,7 +243,7 @@ namespace FractalStudio
         {
             if (btnStop.Enabled)
             {
-                MessageBox.Show("Остановите текущую операцию", "Фракталы", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Остановите текущую операцию", "Размерности", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 return;
             }
@@ -249,12 +261,61 @@ namespace FractalStudio
             if (_windowModal != null)
                 _windowModal.ShowDialog(this);
         }
+
+        private void Settings(object sender, EventArgs e)
+        {
+            if (btnStop.Enabled)
+            {
+                MessageBox.Show("Остановите текущую операцию", "Настройки", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                return;
+            }
+
+            ToolStripMenuItem menuItemSettings = sender as ToolStripMenuItem;
+
+            int tag = Convert.ToInt32(menuItemSettings.Tag);
+
+            switch (tag)
+            {
+                case 0: _windowModal = new SettingSizeImg(ChangedSizeImg, _width, _height); break;
+            }
+
+            if (_windowModal != null)
+                _windowModal.ShowDialog(this);
+        }
+
+        private void ChangedSizeImg(object sender, ImgSizeEventArgs e)
+        {
+            if (ChangeSizeImg != null)
+            {
+                _width = e.Width;
+                _height = e.Height;
+                Properties.Settings.Default.width = _width;
+                Properties.Settings.Default.height = _height;
+                Properties.Settings.Default.Save();
+
+                ChangeSizeImg(this, e);
+            }
+        }
+
+        private void ChangedSizeImg()
+        {
+            if (ChangeSizeImg != null)
+            {
+                ChangeSizeImg(this, new ImgSizeEventArgs() { Width = _width, Height = _height});
+            }
+        }
+
         private void CreateLsys(object sender, CreateLsystemEventArgs e)
         {
             btnStart.Enabled = true;
 
             if (CreateLsystem != null)
+            {
+                
                 CreateLsystem(this, e);
+                ChangedSizeImg();
+            }
         }
 
         private void CreateJuliaSet(object sender, CreateJuliaEventArgs e)
@@ -262,7 +323,12 @@ namespace FractalStudio
             btnStart.Enabled = true;
 
             if (CreateJulia != null)
+            {
+                
                 CreateJulia(this, e);
+                ChangedSizeImg();
+            }
+                
         }
 
         private void CreateMandelbrotSet(object sender, CreateMandelbrotEventArgs e)
@@ -270,7 +336,11 @@ namespace FractalStudio
             btnStart.Enabled = true;
 
             if (CreateMandelbrot != null)
+            {
+                
                 CreateMandelbrot(this, e);
+                ChangedSizeImg();
+            }
         }
 
         private void CreateMinkowski(object sender, CreateMinkowskiEventArgs e)
@@ -302,6 +372,7 @@ namespace FractalStudio
                     ((Button)control).Enabled = false;
             }
 
+           
             if (Start != null)
                 Start(this, EventArgs.Empty);
         }
@@ -342,6 +413,5 @@ namespace FractalStudio
 
             }
         }
-
-       }
+    }
 }

@@ -41,6 +41,9 @@
             this.mandelbrotMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.DimensionsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.minkowskiDimensionMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CorrelationDimensionMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sizeImgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainSatusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.panelContent = new System.Windows.Forms.Panel();
@@ -53,6 +56,7 @@
             this.множествоМандельбротаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.размерностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MinkowskiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CorrelationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainerContent = new System.Windows.Forms.SplitContainer();
             this.groupBoxCreate = new System.Windows.Forms.GroupBox();
             this.lblShortHelp = new System.Windows.Forms.Label();
@@ -61,8 +65,6 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.pictureBoxResult = new System.Windows.Forms.PictureBox();
             this.saveFileDialogImg = new System.Windows.Forms.SaveFileDialog();
-            this.CorrelationDimensionMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.CorrelationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainSatusStrip.SuspendLayout();
             this.panelContent.SuspendLayout();
@@ -82,7 +84,8 @@
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
             this.FractalsMenu,
-            this.DimensionsMenu});
+            this.DimensionsMenu,
+            this.settingsToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Size = new System.Drawing.Size(701, 24);
@@ -184,6 +187,32 @@
             this.minkowskiDimensionMenu.Tag = "0";
             this.minkowskiDimensionMenu.Text = "Минковского";
             this.minkowskiDimensionMenu.Click += new System.EventHandler(this.WindowShowDimension);
+            // 
+            // CorrelationDimensionMenu
+            // 
+            this.CorrelationDimensionMenu.Name = "CorrelationDimensionMenu";
+            this.CorrelationDimensionMenu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.K)));
+            this.CorrelationDimensionMenu.Size = new System.Drawing.Size(241, 22);
+            this.CorrelationDimensionMenu.Tag = "1";
+            this.CorrelationDimensionMenu.Text = "Корреляционная";
+            this.CorrelationDimensionMenu.Click += new System.EventHandler(this.WindowShowDimension);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sizeImgToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.settingsToolStripMenuItem.Text = "Настройки";
+            // 
+            // sizeImgToolStripMenuItem
+            // 
+            this.sizeImgToolStripMenuItem.Name = "sizeImgToolStripMenuItem";
+            this.sizeImgToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.sizeImgToolStripMenuItem.Tag = "0";
+            this.sizeImgToolStripMenuItem.Text = "Размер изображения";
+            this.sizeImgToolStripMenuItem.Click += new System.EventHandler(this.Settings);
             // 
             // mainSatusStrip
             // 
@@ -294,6 +323,13 @@
             this.MinkowskiToolStripMenuItem.Tag = "0";
             this.MinkowskiToolStripMenuItem.Text = "Минковского";
             this.MinkowskiToolStripMenuItem.Click += new System.EventHandler(this.WindowShowDimension);
+            // 
+            // CorrelationToolStripMenuItem
+            // 
+            this.CorrelationToolStripMenuItem.Name = "CorrelationToolStripMenuItem";
+            this.CorrelationToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.CorrelationToolStripMenuItem.Text = "Корреляционная";
+            this.CorrelationToolStripMenuItem.Click += new System.EventHandler(this.WindowShowDimension);
             // 
             // splitContainerContent
             // 
@@ -417,23 +453,6 @@
             this.saveFileDialogImg.Filter = "Image Files|*.jpeg;";
             this.saveFileDialogImg.Title = "Сохранить изображение как..";
             // 
-            // CorrelationDimensionMenu
-            // 
-            this.CorrelationDimensionMenu.Name = "CorrelationDimensionMenu";
-            this.CorrelationDimensionMenu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.K)));
-            this.CorrelationDimensionMenu.Size = new System.Drawing.Size(241, 22);
-            this.CorrelationDimensionMenu.Tag = "1";
-            this.CorrelationDimensionMenu.Text = "Корреляционная";
-            this.CorrelationDimensionMenu.Click += new System.EventHandler(this.WindowShowDimension);
-            // 
-            // CorrelationToolStripMenuItem
-            // 
-            this.CorrelationToolStripMenuItem.Name = "CorrelationToolStripMenuItem";
-            this.CorrelationToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.CorrelationToolStripMenuItem.Text = "Корреляционная";
-            this.CorrelationToolStripMenuItem.Click += new System.EventHandler(this.WindowShowDimension);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -505,6 +524,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialogImg;
         private System.Windows.Forms.ToolStripMenuItem CorrelationDimensionMenu;
         private System.Windows.Forms.ToolStripMenuItem CorrelationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sizeImgToolStripMenuItem;
     }
 }
 

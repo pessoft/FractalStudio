@@ -24,6 +24,7 @@ namespace FractalStudio.Presentation
             _view = view;
             _fractalSource = fractalsSource;
 
+            _view.ChangeSizeImg += ViewChangeSizeImg;
             _view.CreateMinkowskiDimesion += ViewCreateMinkowskiDimesion;
             _view.CreateJulia += ViewCreateJulia;
             _view.CreateMandelbrot += ViewCreateMandelbrot;
@@ -31,6 +32,12 @@ namespace FractalStudio.Presentation
             _view.CreateLsystem += ViewCreateLsystem;
             _view.Start += ViewStart;
             _view.Stop += ViewStop;
+        }
+
+        private void ViewChangeSizeImg(object sender, ImgSizeEventArgs e)
+        {
+            if (_fractal != null)
+                _fractal.SetSize(e.Width, e.Height);
         }
 
         private void ViewCreateLsystem(object sender, CreateLsystemEventArgs e)

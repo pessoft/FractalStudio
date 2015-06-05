@@ -12,6 +12,7 @@ namespace FractalStudio
         event EventHandler<CreateMinkowskiEventArgs> CreateMinkowskiDimesion;
         event EventHandler<CreateCorrelationEventArgs> CreateCorrelationDimesion;
         event EventHandler<CreateMandelbrotEventArgs> CreateMandelbrot;
+        event EventHandler<ImgSizeEventArgs> ChangeSizeImg;
         event EventHandler Start;
         event EventHandler Stop;
         #endregion
