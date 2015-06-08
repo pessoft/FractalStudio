@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingSizeImg));
             this.groupBoxSizeImg = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.numericWidth = new System.Windows.Forms.NumericUpDown();
-            this.numericHeight = new System.Windows.Forms.NumericUpDown();
             this.btnOk = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.numericHeight = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numericWidth = new System.Windows.Forms.NumericUpDown();
             this.groupBoxSizeImg.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericHeight)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericWidth)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxSizeImg
@@ -55,17 +56,18 @@
             this.groupBoxSizeImg.TabStop = false;
             this.groupBoxSizeImg.Text = "Размерны";
             // 
-            // groupBox1
+            // btnOk
             // 
-            this.groupBox1.Controls.Add(this.numericWidth);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.Info;
-            this.groupBox1.Location = new System.Drawing.Point(6, 19);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(90, 60);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Ширина";
+            this.btnOk.BackColor = System.Drawing.SystemColors.Window;
+            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOk.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnOk.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnOk.Location = new System.Drawing.Point(104, 85);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(87, 34);
+            this.btnOk.TabIndex = 3;
+            this.btnOk.Text = "Ok";
+            this.btnOk.UseVisualStyleBackColor = false;
             // 
             // groupBox2
             // 
@@ -78,28 +80,6 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Высота";
-            // 
-            // numericWidth
-            // 
-            this.numericWidth.Location = new System.Drawing.Point(7, 25);
-            this.numericWidth.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.numericWidth.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericWidth.Name = "numericWidth";
-            this.numericWidth.Size = new System.Drawing.Size(77, 25);
-            this.numericWidth.TabIndex = 0;
-            this.numericWidth.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
             // 
             // numericHeight
             // 
@@ -123,18 +103,39 @@
             0,
             0});
             // 
-            // btnOk
+            // groupBox1
             // 
-            this.btnOk.BackColor = System.Drawing.SystemColors.Window;
-            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOk.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnOk.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnOk.Location = new System.Drawing.Point(104, 85);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(87, 34);
-            this.btnOk.TabIndex = 3;
-            this.btnOk.Text = "Ok";
-            this.btnOk.UseVisualStyleBackColor = false;
+            this.groupBox1.Controls.Add(this.numericWidth);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Info;
+            this.groupBox1.Location = new System.Drawing.Point(6, 19);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(90, 60);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Ширина";
+            // 
+            // numericWidth
+            // 
+            this.numericWidth.Location = new System.Drawing.Point(7, 25);
+            this.numericWidth.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.numericWidth.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericWidth.Name = "numericWidth";
+            this.numericWidth.Size = new System.Drawing.Size(77, 25);
+            this.numericWidth.TabIndex = 0;
+            this.numericWidth.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             // 
             // SettingSizeImg
             // 
@@ -146,6 +147,7 @@
             this.Controls.Add(this.groupBoxSizeImg);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -154,10 +156,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Настройка изображения";
             this.groupBoxSizeImg.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericHeight)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericWidth)).EndInit();
             this.ResumeLayout(false);
 
         }
