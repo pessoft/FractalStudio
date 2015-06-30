@@ -10,6 +10,7 @@ namespace FractalStudio
         EventHandler<CreateLsystemEventArgs> _Create;
         IGroupCreate _groupCrt;
         Dictionary<char, string> _rules;
+        int selectIndex = -1;
         public LsystemWindow(EventHandler<CreateLsystemEventArgs> create)
         {
             InitializeComponent();
@@ -52,11 +53,28 @@ namespace FractalStudio
         {
             if (e.KeyCode == Keys.Enter)
             {
-                
+                #region Переделать комбобокс, башка не рубит
+                //throw new NotImplementedException();
+                //string value = comboBoxRules.Text.Trim();
+                //if (value == "")
+                //{
+                //    if (comboBoxRules.Items.Count > comboBoxRules.SelectedIndex && comboBoxRules.SelectedIndex >= 0)
+                //        comboBoxRules.Items.RemoveAt(comboBoxRules.SelectedIndex);
+                //}
+                //else
+                //{
+                //    if (comboBoxRules.Items.Count > comboBoxRules.SelectedIndex && comboBoxRules.SelectedIndex >= 0)
+                //        comboBoxRules.Items[comboBoxRules.SelectedIndex] = value;
+                //    else
+                //        comboBoxRules.Items.Add(value);
+                //}
+
+                //MessageBox.Show(comboBoxRules.SelectedIndex.ToString());
+                #endregion
                 if (!comboBoxRules.Items.Contains(comboBoxRules.Text))
                 {
                     char key = comboBoxRules.Text.Substring(0, comboBoxRules.Text.IndexOf("->")).ToCharArray()[0];
-                    string value = comboBoxRules.Text.Substring(comboBoxRules.Text.IndexOf("->") + 2, comboBoxRules.Text.Length-3);
+                    string value = comboBoxRules.Text.Substring(comboBoxRules.Text.IndexOf("->") + 2, comboBoxRules.Text.Length - 3);
                     if (_rules.ContainsKey(key))
                         _rules[key] = value;
                     else
@@ -64,6 +82,11 @@ namespace FractalStudio
                 }
                 comboBoxRules.Text = "";
             }
+        }
+
+        private void ComboBoxRulesSelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectIndex = comboBoxRules.SelectedIndex;
         }
     }
 }

@@ -174,6 +174,7 @@
             this.comboBoxRules.TabIndex = 6;
             this.comboBoxRules.Text = "Правила";
             this.toolTipRules.SetToolTip(this.comboBoxRules, "Введите пораждающее правило:\r\nПример:\r\n F->F+F--F+F\r\n X->XY+Ff+Z\r\n Z ->F-F+Ff");
+            this.comboBoxRules.SelectedIndexChanged += new System.EventHandler(this.ComboBoxRulesSelectedIndexChanged);
             this.comboBoxRules.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxRules_KeyDown);
             // 
             // groupBox1

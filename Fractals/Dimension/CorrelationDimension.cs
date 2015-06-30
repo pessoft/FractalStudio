@@ -94,7 +94,7 @@ namespace Fractals.Dimension
         //    bool[,] colorImg = new bool[width, height];
         //    List<Point> points;
         //    bool[,] filledBoxes;
-
+        //    _max = 100;
         //    points = new List<Point>();
         //    //Получаем датасет цветов изображения для ускорения работы
         //    for (int x = 0; x < width; x++)
@@ -111,15 +111,15 @@ namespace Fractals.Dimension
 
 
 
-        //    int sum = 0; double ttt = 0;int count = points.Count;
+        //    int sum = 0; double ttt = 0; int count = points.Count;
         //    //Имитация предела с изменение размера ячейки epsilon
-        //    for (int epsilon = 5; epsilon <=100; epsilon += _step)
+        //    for (int epsilon = 5; epsilon <= 100; epsilon += _step)
         //    {
         //        sum = 0;
 
         //        foreach (var point in points.AsParallel())
         //        {
-        //            sum+=points.AsParallel().Count(p => inSet(p, point, epsilon));
+        //            sum += points.AsParallel().Count(p => inSet(p, point, epsilon));
         //        }
 
         //        //foreach (var pointI in points)
@@ -135,7 +135,7 @@ namespace Fractals.Dimension
         //        //}
         //        ++_value;
         //        OnChangedProgress();
-        //        baList.Add(Math.Log(epsilon), Math.Log(1/Math.Pow(points.Count,2) *sum));
+        //        baList.Add(Math.Log(epsilon), Math.Log(1 / Math.Pow(points.Count, 2) * sum));
 
         //        //_value = _value + _step >= _finishSize-_startSize ? _value = _finishSize - _startSize : _value + _step;
 
@@ -159,7 +159,7 @@ namespace Fractals.Dimension
             //Получаем датасет цветов изображения для ускорения работы
             Dictionary<Point, int> countIteration = new Dictionary<Point, int>();
             _max = 100;
-                
+
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
@@ -176,12 +176,12 @@ namespace Fractals.Dimension
 
 
             int sum = 0; double ttt = 0; int count = points.Count;
-            int countInRadius=0;int iStart = 0, jStart = 0, iEnd = 0, jEnd = 0;
+            int countInRadius = 0; int iStart = 0, jStart = 0, iEnd = 0, jEnd = 0;
             List<Point> tmpPoints;
 
-           
-            int jS=0,jE = 0,iS=0,iE=0;
-            
+
+            int jS = 0, jE = 0, iS = 0, iE = 0;
+
             double eDSqr = 0;
             //Имитация предела с изменение размера ячейки epsilon
             for (int epsilon = 5; epsilon <= 100; epsilon += _step)

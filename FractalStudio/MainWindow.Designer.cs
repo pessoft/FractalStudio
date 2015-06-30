@@ -36,7 +36,6 @@
             this.CloseAppMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.FractalsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.lsystemMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.affineTransformMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.juliaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mandelbrotMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.DimensionsMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,7 +121,6 @@
             // 
             this.FractalsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lsystemMenu,
-            this.affineTransformMenu,
             this.juliaMenu,
             this.mandelbrotMenu});
             this.FractalsMenu.Name = "FractalsMenu";
@@ -134,27 +132,17 @@
             this.lsystemMenu.Name = "lsystemMenu";
             this.lsystemMenu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.L)));
-            this.lsystemMenu.Size = new System.Drawing.Size(297, 22);
+            this.lsystemMenu.Size = new System.Drawing.Size(222, 22);
             this.lsystemMenu.Tag = "0";
             this.lsystemMenu.Text = "L-системы";
             this.lsystemMenu.Click += new System.EventHandler(this.WindowShowFractal);
-            // 
-            // affineTransformMenu
-            // 
-            this.affineTransformMenu.Name = "affineTransformMenu";
-            this.affineTransformMenu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.A)));
-            this.affineTransformMenu.Size = new System.Drawing.Size(297, 22);
-            this.affineTransformMenu.Tag = "1";
-            this.affineTransformMenu.Text = "Аффиные преобразования";
-            this.affineTransformMenu.Click += new System.EventHandler(this.WindowShowFractal);
             // 
             // juliaMenu
             // 
             this.juliaMenu.Name = "juliaMenu";
             this.juliaMenu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.J)));
-            this.juliaMenu.Size = new System.Drawing.Size(297, 22);
+            this.juliaMenu.Size = new System.Drawing.Size(222, 22);
             this.juliaMenu.Tag = "2";
             this.juliaMenu.Text = "Жюлиа";
             this.juliaMenu.Click += new System.EventHandler(this.WindowShowFractal);
@@ -164,7 +152,7 @@
             this.mandelbrotMenu.Name = "mandelbrotMenu";
             this.mandelbrotMenu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.T)));
-            this.mandelbrotMenu.Size = new System.Drawing.Size(297, 22);
+            this.mandelbrotMenu.Size = new System.Drawing.Size(222, 22);
             this.mandelbrotMenu.Tag = "3";
             this.mandelbrotMenu.Text = "Мандельброт";
             this.mandelbrotMenu.Click += new System.EventHandler(this.WindowShowFractal);
@@ -510,7 +498,6 @@
         private System.Windows.Forms.GroupBox groupBoxCreate;
         private System.Windows.Forms.Label lblShortHelp;
         private System.Windows.Forms.ToolStripMenuItem lsystemMenu;
-        private System.Windows.Forms.ToolStripMenuItem affineTransformMenu;
         private System.Windows.Forms.ToolStripMenuItem juliaMenu;
         private System.Windows.Forms.ToolStripMenuItem mandelbrotMenu;
         private System.Windows.Forms.ToolStripMenuItem minkowskiDimensionMenu;
