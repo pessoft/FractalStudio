@@ -194,30 +194,31 @@ namespace Fractals.Fractal
                             }
                         case 'f':
                             {
-                                coordSource.x1 = coordSource.x2;
-                                coordSource.y1 = coordSource.y2;
-                                coordSource.x2 = coordSource.x1 + step * Math.Sin(_initAngle);
-                                coordSource.y2 = coordSource.y1 + step * Math.Cos(_initAngle);
+                            coordTmp = coordSource;
+                            coordSource.x1 = coordTmp.x2;
+                            coordSource.y1 = coordTmp.y2;
+                            coordSource.x2 = coordSource.x1 + step * Math.Sin(Radians(_angleRotation));
+                            coordSource.y2 = coordSource.y1 - step * Math.Cos(Radians(_angleRotation));
 
-                                //if (coordSource.x1 > maxX)
-                                //    maxX = coordSource.x1;
-                                //if (coordSource.x2 > maxX)
-                                //    maxX = coordSource.x2;
-                                //if (coordSource.y1 > maxY)
-                                //    maxY = coordSource.y1;
-                                //if (coordSource.y2 > maxY)
-                                //    maxY = coordSource.y2;
+                            //if (coordSource.x1 > maxX)
+                            //    maxX = coordSource.x1;
+                            //if (coordSource.x2 > maxX)
+                            //    maxX = coordSource.x2;
+                            //if (coordSource.y1 > maxY)
+                            //    maxY = coordSource.y1;
+                            //if (coordSource.y2 > maxY)
+                            //    maxY = coordSource.y2;
 
-                                //if (coordSource.x1 < minX)
-                                //    minX = coordSource.x1;
-                                //if (coordSource.x2 < minX)
-                                //    minX = coordSource.x2;
-                                //if (coordSource.y1 < minY)
-                                //    minY = coordSource.y1;
-                                //if (coordSource.y2 < minY)
-                                //    minY = coordSource.y2;
+                            //if (coordSource.x1 < minX)
+                            //    minX = coordSource.x1;
+                            //if (coordSource.x2 < minX)
+                            //    minX = coordSource.x2;
+                            //if (coordSource.y1 < minY)
+                            //    minY = coordSource.y1;
+                            //if (coordSource.y2 < minY)
+                            //    minY = coordSource.y2;
 
-                                break;
+                            break;
                             }
                     }
                     ++_changedProgressEventArgs.Value;

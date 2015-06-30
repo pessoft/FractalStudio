@@ -98,7 +98,7 @@ namespace Fractals.Dimension
         private Dictionary<double, double> ReceiveData(Bitmap img)
         {
             Dictionary<double, double> baList = new Dictionary<double, double>();
-            Bitmap bmp = BitmapBinary.ToBlackWhite(img);
+            Bitmap bmp = img;//BitmapBinary.ToBlackWhite(img);
             int height = img.Height;
             int width = img.Width;
             bool[,] colorImg = new bool[width, height];
