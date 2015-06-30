@@ -51,7 +51,7 @@ namespace FractalStudio
 
         private void comboBoxRules_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && comboBoxRules.Text.IndexOf(("->")) != -1)
             {
                 #region Переделать комбобокс, башка не рубит
                 //throw new NotImplementedException();
